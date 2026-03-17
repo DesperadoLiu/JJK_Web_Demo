@@ -1,0 +1,624 @@
+﻿<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="京簡康提供均衡健康餐盒，嚴選食材、少油清爽，支援門市快速取餐與線上訂餐。">
+    <meta name="robots" content="index,follow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="京簡康｜健康餐盒外送與門市訂餐">
+    <meta property="og:description" content="均衡營養、每日新鮮備料，查看門市資訊立即訂餐。">
+    <meta property="og:image" content="https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/%E4%BA%AC%E7%B0%A1%E5%BA%B7-LOGO-%E7%B5%A6%E5%BB%A0%E5%95%86-03.png">
+    <meta property="og:locale" content="zh_TW">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="assets/favicon-jjk.svg" type="image/svg+xml">
+    <link rel="shortcut icon" href="assets/favicon-jjk.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/favicon-jjk.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://formosachangcoltd.wpcomstaging.com" crossorigin>
+    <link rel="preconnect" href="https://videos.files.wordpress.com" crossorigin>
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), browsing-topics=(), interest-cohort=()">
+    <!-- 安全強化：導入內容安全政策 (CSP) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data: https://formosachangcoltd.wpcomstaging.com https://videos.files.wordpress.com; media-src 'self' blob: https://videos.files.wordpress.com; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-src 'none'; form-action 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+    
+    <title>京簡康｜健康餐盒外送與門市訂餐</title>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="tailwind.generated.css" rel="stylesheet">
+    <link href="JJKwebsite.css" rel="stylesheet">
+    <script src="JJKwebsite_no_ai_clean.js" defer></script>
+</head>
+<body class="no-ai-page bg-slate-50 text-slate-800">
+
+    <!-- 導覽列 -->
+    <nav class="fixed w-full bg-white/95 backdrop-blur-xl shadow-sm z-[60]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="flex items-center">
+                        <img src="https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/京簡康-LOGO-給廠商-03.png" alt="京簡康 Logo" class="h-14 w-auto object-contain">
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center justify-between w-full max-w-3xl mx-8">
+                    <a href="#about" class="nav-menu-btn text-slate-600 hover:text-brand-orange font-medium transition-colors text-sm lg:text-base whitespace-nowrap">品牌理念</a>
+                    <a href="#news" class="nav-menu-btn text-slate-600 hover:text-brand-orange font-medium transition-colors text-sm lg:text-base whitespace-nowrap">最新消息</a>
+                    <a href="#calculator" class="nav-menu-btn text-slate-600 hover:text-brand-orange font-medium transition-colors text-sm lg:text-base whitespace-nowrap">熱量試算</a>
+                    <a href="#game" class="nav-menu-btn text-slate-600 hover:text-brand-orange font-medium transition-colors text-sm lg:text-base whitespace-nowrap">互動遊戲</a>
+                    <a href="#menu" class="nav-menu-btn text-slate-600 hover:text-brand-orange font-medium transition-colors text-sm lg:text-base whitespace-nowrap">特色餐盒</a>
+                    <a href="#locations" class="nav-menu-btn text-slate-600 hover:text-brand-orange font-medium transition-colors text-sm lg:text-base whitespace-nowrap">服務據點</a>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="openMobileMenuButton" type="button" class="mobile-only-menu-btn md:hidden w-11 h-11 rounded-xl border border-slate-200 text-slate-700 bg-white active:scale-95" aria-label="開啟快速選單" aria-expanded="false" aria-controls="mobileQuickMenu">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                    <!-- ???????? -->
+                    <button id="openStoreModalButton" type="button" class="btn-primary text-white px-8 py-3 rounded-full font-bold transition-all shadow-md active:scale-95 text-sm md:text-base">
+                        線上點餐
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobileQuickMenu" class="mobile-only-drawer mobile-drawer md:hidden hidden fixed inset-0 z-[200]">
+        <div class="mobile-drawer-backdrop absolute inset-0 bg-slate-900/20 backdrop-blur-sm"></div>
+        <div class="mobile-drawer-panel absolute right-0 top-0 h-full w-[84%] max-w-[340px] bg-white shadow-lg border-l border-slate-100 p-6 flex flex-col gap-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-2">
+                <p class="text-slate-800 font-medium tracking-widest">快速選單</p>
+                <button id="closeMobileMenuButton" type="button" class="w-10 h-10 rounded-full flex items-center justify-center text-slate-500 hover:bg-slate-100 transition-colors" aria-label="關閉快速選單">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <a href="#about" class="mobile-menu-link nav-menu-btn text-slate-600 hover:text-slate-900 font-light tracking-widest py-3">品牌理念</a>
+            <a href="#news" class="mobile-menu-link nav-menu-btn text-slate-600 hover:text-slate-900 font-light tracking-widest py-3">最新消息</a>
+            <a href="#calculator" class="mobile-menu-link nav-menu-btn text-slate-600 hover:text-slate-900 font-light tracking-widest py-3">熱量試算</a>
+            <a href="#game" class="mobile-menu-link nav-menu-btn text-slate-600 hover:text-slate-900 font-light tracking-widest py-3">互動遊戲</a>
+            <a href="#menu" class="mobile-menu-link nav-menu-btn text-slate-600 hover:text-slate-900 font-light tracking-widest py-3">特色餐盒</a>
+            <a href="#locations" class="mobile-menu-link nav-menu-btn text-slate-600 hover:text-slate-900 font-light tracking-widest py-3">服務據點</a>
+        </div>
+    </div>
+
+    <!-- ???? -->
+    <section class="hero-bg h-[90vh] relative">
+        <div class="hero-brand-panel">
+            <p class="hero-brand-eyebrow">JING JIAN KANG</p>
+            <h1 class="hero-brand-title">京選食材，簡單純粹</h1>
+            <p class="hero-brand-text">健康新餐食，從每日都能安心持續的一份餐盒開始。</p>
+            <div class="hero-brand-meta">
+                <span>均衡營養</span>
+                <span>少油清爽</span>
+                <span>門市快速取餐</span>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- 品牌理念 -->
+    <section id="about" class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20 relative">
+                <img src="https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/京簡康-公仔-AI完整檔-09.png" class="hidden lg:block absolute -left-10 top-0 h-48 w-auto mascot-float opacity-90" alt="康妹">
+                <img src="https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/京簡康-公仔-AI完整檔-04.png" class="hidden lg:block absolute -right-10 top-0 h-48 w-auto mascot-float opacity-90" alt="京哥">
+                <p class="text-brand-orange font-medium tracking-[0.4em] mb-4 uppercase">忙碌生活，是否忘了好好照顧自己？</p>
+                <h1 class="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">京選食材，簡單純粹</h1>
+                <div class="w-24 h-1.5 bg-brand-orange mx-auto rounded-full mb-10"></div>
+                <div class="max-w-3xl mx-auto space-y-6">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-800 tracking-widest">關於京簡康</h2>
+                    <p class="text-slate-600 text-lg leading-loose font-light">想擁有『好吃、健康、無負擔』美味餐點？<br><span class="text-brand-orange font-bold tracking-widest">京簡康 - 健康新餐食</span> 為此而生。</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="p-12 bg-slate-50 rounded-[3.5rem] text-center border border-slate-100 transition-all hover:border-brand-orange group shadow-sm flex flex-col items-center">
+                    <img src="https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/京簡康-公仔-AI完整檔-06.png" class="h-32 w-auto mb-6 mascot-float drop-shadow-md" alt="京哥">
+                    <div class="text-6xl font-black text-brand-orange mb-6 group-hover:scale-110 transition-transform">京</div>
+                    <h4 class="text-xl font-bold mb-4 text-slate-800 tracking-widest uppercase">京哥：最上級</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed">代表頂尖的選擇，提倡原形食材、安心健康。</p>
+                </div>
+                <div class="p-12 bg-slate-50 rounded-[3.5rem] text-center border border-slate-100 transition-all hover:border-brand-orange group shadow-sm flex flex-col items-center">
+                    <img src="https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/京簡康-公仔-AI完整檔-05.png" class="h-32 w-auto mb-6 mascot-float drop-shadow-md" alt="簡單原味">
+                    <div class="text-6xl font-black text-brand-orange mb-6 group-hover:scale-110 transition-transform">簡</div>
+                    <h4 class="text-xl font-bold mb-4 text-slate-800 tracking-widest uppercase">簡單原味</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed">簡單調味不繁瑣，讓您吃得到食材最真實的味道。</p>
+                </div>
+                <div class="p-12 bg-slate-50 rounded-[3.5rem] text-center border border-slate-100 transition-all hover:border-brand-orange group shadow-sm flex flex-col items-center">
+                    <img src="https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/京簡康-公仔-AI完整檔-07.png" class="h-32 w-auto mb-6 mascot-float drop-shadow-md" alt="康妹">
+                    <div class="text-6xl font-black text-brand-orange mb-6 group-hover:scale-110 transition-transform">康</div>
+                    <h4 class="text-xl font-bold mb-4 text-slate-800 tracking-widest uppercase">康妹：更健康</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed">均衡營養與專業烹調，讓享用餐點成為健康的來源。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 形象影片 -->
+    <section id="video" class="py-24 bg-slate-100">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="video-container shadow-2xl bg-black">
+                <video src="https://videos.files.wordpress.com/emHG9b3J/jjk_e5bdb1e78987_e5bda2e8b1a1e4b880e58886e58d8a.mp4" autoplay muted loop playsinline preload="metadata" controls class="w-full h-full object-cover"></video>
+            </div>
+        </div>
+    </section>
+
+    <!-- 最新消息 -->
+    <section id="news" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-wider">最新消息</h2>
+                    <div class="w-12 h-1.5 bg-brand-orange rounded-full mt-4"></div>
+                </div>
+                <a href="#" class="text-brand-orange font-bold hover:text-brand-dark transition-colors text-sm tracking-widest flex items-center gap-1">
+                    查看全部 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+            <div id="newsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 消息卡片 1 -->
+                <a href="#" class="group block overflow-hidden rounded-3xl bg-slate-50 border border-slate-100 hover:border-brand-orange/30 transition-all shadow-sm hover:shadow-md">
+                    <div class="h-48 bg-slate-200 overflow-hidden relative">
+                        <img src="https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/JJK-視覺照3去番茄.jpg" alt="夏季限定菜單" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 pb-1.5 rounded-lg text-brand-orange font-bold text-sm tracking-wider">新品上市</div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-slate-400 text-sm mb-2 font-medium">2026.04.01</p>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3 group-hover:text-brand-orange transition-colors line-clamp-2">夏季限定！清爽涼拌菜單全新上市，擊退酷暑胃口大開</h3>
+                        <p class="text-slate-500 text-sm line-clamp-3 leading-relaxed">炎炎夏日沒胃口？京簡康主廚研發多款開胃涼拌配菜，搭配特調和風柚子醬，讓您吃得清爽無負擔...</p>
+                    </div>
+                </a>
+                <!-- 消息卡片 2 -->
+                <a href="#" class="group block overflow-hidden rounded-3xl bg-slate-50 border border-slate-100 hover:border-brand-orange/30 transition-all shadow-sm hover:shadow-md">
+                    <div class="h-48 bg-slate-200 overflow-hidden relative flex items-center justify-center">
+                        <div class="w-20 h-20 rounded-full bg-green-500 flex items-center justify-center">
+                            <svg class="w-10 h-10 fill-white" viewBox="0 0 24 24"><path d="M24 10.304c0-4.369-5.383-7.904-12-7.904s-12 3.535-12 7.904c0 3.921 4.279 7.21 10.074 7.853.392.081.926.258 1.054.592.146.381.096.975.046 1.358l-.198 1.202c-.061.363-.284 1.419 1.22 0.775 1.504-.644 8.125-4.782 11.077-8.182 1.516-1.742 2.727-3.704 2.727-5.6z"/></svg>
+                        </div>
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 pb-1.5 rounded-lg text-green-600 font-bold text-sm tracking-wider">專屬優惠</div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-slate-400 text-sm mb-2 font-medium">2026.03.15</p>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3 group-hover:text-brand-orange transition-colors line-clamp-2">【LINE 好友限定】加入官方帳號，立即領取 30 元折價券</h3>
+                        <p class="text-slate-500 text-sm line-clamp-3 leading-relaxed">即日起加入京簡康官方 LINE 帳號，不僅能第一時間獲得最新菜單與優惠通知，還能直接領取專屬折扣碼...</p>
+                    </div>
+                </a>
+                <!-- 消息卡片 3 -->
+                <a href="#" class="group block overflow-hidden rounded-3xl bg-slate-50 border border-slate-100 hover:border-brand-orange/30 transition-all shadow-sm hover:shadow-md">
+                    <div class="h-48 bg-slate-200 overflow-hidden relative">
+                        <img src="https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/京簡康-公仔-AI完整檔-09.png" alt="門市活動" class="w-full h-full object-contain bg-orange-50 p-4 transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 pb-1.5 rounded-lg text-blue-600 font-bold text-sm tracking-wider">門市活動</div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-slate-400 text-sm mb-2 font-medium">2026.03.01</p>
+                        <h3 class="text-xl font-bold text-slate-800 mb-3 group-hover:text-brand-orange transition-colors line-clamp-2">慶祝三峽北大店開幕滿月！來店消費送無糖鮮豆漿</h3>
+                        <p class="text-slate-500 text-sm line-clamp-3 leading-relaxed">感謝在地鄉親支持，三峽北大店開幕滿一個月囉！活動期間內來店購買任一主餐，即贈送特濃無糖豆漿乙杯...</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 熱量試算器 -->
+    <section id="calculator" class="calculator-section py-24 bg-slate-50 relative overflow-hidden">
+        <!-- 背景裝飾 -->
+        <div class="absolute -top-24 -right-24 w-64 h-64 bg-brand-orange/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 -left-20 w-80 h-80 bg-brand-dark/5 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto px-4 z-10 relative">
+            <div class="calculator-intro text-center mb-12 md:mb-14">
+                <span class="text-brand-orange font-bold tracking-widest text-sm bg-orange-100 px-4 py-1.5 rounded-full mb-4 inline-block">PERSONALIZED NUTRITION</span>
+                <h2 class="text-4xl md:text-5xl font-black text-slate-900 mt-4 mb-4 tracking-wide">專屬熱量與餐點推薦</h2>
+                <p class="text-slate-600 text-base md:text-lg leading-relaxed max-w-3xl mx-auto">不知道該怎麼挑選？輸入您的基本資料，讓我們為您計算每日所需熱量 (TDEE)，並推薦最適合您的健康餐盒組合。</p>
+            </div>
+
+            <div class="calculator-form-wrap calculator-card bg-white rounded-[2.5rem] shadow-xl p-8 md:p-12 border border-slate-100">
+                <form id="calorieCalculatorForm" class="space-y-7">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- 性別 -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-bold text-slate-700">性別</label>
+                            <select id="calcGender" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-brand-orange focus:border-brand-orange block p-3.5 transition-colors">
+                                <option value="male">男性</option>
+                                <option value="female">女性</option>
+                            </select>
+                        </div>
+                        <!-- 年齡 -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-bold text-slate-700">年齡 <span class="text-slate-400 font-normal">(歲)</span></label>
+                            <input type="number" id="calcAge" placeholder="例如: 28" min="10" max="100" required class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-brand-orange focus:border-brand-orange block p-3.5 transition-colors">
+                        </div>
+                        <!-- 身高 -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-bold text-slate-700">身高 <span class="text-slate-400 font-normal">(cm)</span></label>
+                            <input type="number" id="calcHeight" placeholder="例如: 170" min="100" max="250" required class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-brand-orange focus:border-brand-orange block p-3.5 transition-colors">
+                        </div>
+                        <!-- 體重 -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-bold text-slate-700">體重 <span class="text-slate-400 font-normal">(kg)</span></label>
+                            <input type="number" id="calcWeight" placeholder="例如: 65" min="30" max="200" required step="0.1" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-brand-orange focus:border-brand-orange block p-3.5 transition-colors">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 border-t border-slate-100">
+                        <!-- 活動量 -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-bold text-slate-700">日常活動量</label>
+                            <select id="calcActivity" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-brand-orange focus:border-brand-orange block p-3.5 transition-colors">
+                                <option value="1.2">久坐 (辦公室工作，幾乎不運動)</option>
+                                <option value="1.375">輕度活動 (每週運動 1-3 天)</option>
+                                <option value="1.55" selected>中度活動 (每週運動 3-5 天)</option>
+                                <option value="1.725">高度活動 (每週運動 6-7 天)</option>
+                                <option value="1.9">非常活躍 (勞力工作或每天訓練2次)</option>
+                            </select>
+                        </div>
+                        <!-- 目標 -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-bold text-slate-700">您的目標</label>
+                            <select id="calcGoal" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-brand-orange focus:border-brand-orange block p-3.5 transition-colors">
+                                <option value="lose">減脂 (創造熱量赤字)</option>
+                                <option value="maintain" selected>維持現狀 (健康飲食)</option>
+                                <option value="gain">增肌 (創造熱量盈餘)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="calculator-submit-btn w-full btn-primary text-white font-bold rounded-2xl text-xl px-6 py-4 text-center mt-10 md:mt-12 hover:shadow-lg transition-all active:scale-[0.98] tracking-widest">
+                        立即計算為我推薦
+                    </button>
+                </form>
+
+                <!-- 試算結果 (預設隱藏) -->
+                <div id="calorieResult" class="calculator-result mt-8 pt-8 border-t border-slate-200 hidden">
+                    <div class="rounded-3xl p-6 md:p-8 bg-orange-50 border border-orange-100 flex flex-col items-center text-center">
+                        <p class="text-brand-orange font-bold text-base tracking-widest mb-2">專屬您的建議攝取量</p>
+                        <div class="text-4xl md:text-5xl font-black text-slate-800 mb-2">
+                            <span id="calcResultTdee">2100 大卡</span>
+                        </div>
+                        <p class="text-slate-500 text-base mb-6 max-w-md mx-auto">此為根據您的資料估算出的每日建議總熱量。以下是我們為您挑選的最適合餐盒：</p>
+                        
+                        <!-- 推薦餐點區塊 (由 JS 動態填入) -->
+                        <div id="recommendedMeals" class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                            <!-- JS 生成的推薦卡片會放在這裡 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特色餐點 -->
+    <section id="game" class="game-section py-24 bg-white relative overflow-hidden">
+        <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-orange-50 to-transparent pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-10 md:mb-12">
+                <p class="text-brand-orange font-bold tracking-[0.35em] text-sm uppercase mb-4">Mini Game</p>
+                <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-4">&#20114;&#21205;&#23567;&#36938;&#25138;</h2>
+                <p class="text-slate-600 max-w-3xl mx-auto text-base md:text-lg leading-relaxed">
+                    跟著京哥在 40 秒內接住健康食材、避開高負擔食物。分數越高，就越能解鎖更適合你的餐盒推薦。
+                </p>
+            </div>
+
+            <div class="game-launch-card rounded-[2.5rem] border border-orange-100 shadow-xl overflow-hidden">
+                <div class="game-launch-inner">
+                    <div class="game-launch-visual">
+                        <span class="game-launch-badge">SIGNATURE PLAY</span>
+                        <img src="https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/%E4%BA%AC%E7%B0%A1%E5%BA%B7-%E5%85%AC%E4%BB%94-AI%E5%AE%8C%E6%95%B4%E6%AA%94-04.png" alt="&#20140;&#21733;" class="game-launch-mascot">
+                    </div>
+                    <div class="game-launch-copy">
+                        <p class="game-launch-kicker">&#20140;&#21733;&#24050;&#23601;&#20301;&#65292;&#36992;&#20320;&#21152;&#20837;&#20170;&#26085;&#38480;&#23450;&#25361;&#25136;</p>
+                        <div class="game-launch-meta">
+                            <span class="game-launch-pill">40 &#31186;&#38480;&#26178;</span>
+                            <span class="game-launch-pill">&#39640;&#20998;&#25361;&#25136;</span>
+                            <span class="game-launch-pill">&#25512;&#34214;&#39184;&#30418;</span>
+                        </div>
+                        <p class="game-side-eyebrow">&#29609;&#27861;&#37325;&#40670;</p>
+                        <ul class="game-side-list">
+                            <li>&#22312; 40 &#31186;&#20839;&#25509;&#20303;&#20581;&#24247;&#39184;&#30418;&#12289;&#33457;&#26828;&#33756;&#12289;&#38622;&#32905;&#20358;&#32047;&#31309;&#39640;&#20998;</li>
+                            <li>&#38275;&#36991;&#28856;&#38622;&#12289;&#34223;&#26781;&#12289;&#29645;&#22902;&#65292;&#25758;&#21040;&#26371;&#25187;&#29983;&#21629;&#20540;</li>
+                            <li>&#25343;&#21040;&#20445;&#20919;&#31665;&#21487;&#30701;&#26283;&#35703;&#30462;&#65292;&#32080;&#26463;&#24460;&#36996;&#26371;&#25512;&#34214;&#36969;&#21512;&#20320;&#30340;&#39184;&#30418;</li>
+                        </ul>
+                    </div>
+                    <div class="game-launch-actions">
+                        <button id="openGameModalButton" type="button" class="btn-primary text-white rounded-full font-bold px-8 py-4 shadow-md">&#38283;&#22987;&#36938;&#25138;</button>
+                    </div>
+                    <p class="game-launch-note">&#20197; 40 &#31186;&#23436;&#25104;&#19968;&#22580;&#36629;&#30408;&#34909;&#21050;&#65292;&#32080;&#26463;&#24460;&#28858;&#20320;&#21576;&#19978;&#36969;&#21512;&#30340;&#20581;&#24247;&#39184;&#30418;&#12290;</p>
+                </div>
+            </div>
+
+            <div class="game-launch-card quiz-launch-card rounded-[2.5rem] border border-orange-100 shadow-xl overflow-hidden">
+                <div class="game-launch-inner">
+                    <div class="game-launch-visual quiz-launch-visual">
+                        <span class="game-launch-badge">QUICK QUIZ</span>
+                        <img src="https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/%E4%BA%AC%E7%B0%A1%E5%BA%B7-%E5%85%AC%E4%BB%94-AI%E5%AE%8C%E6%95%B4%E6%AA%94-09.png" alt="&#24247;&#22969;" class="game-launch-mascot quiz-launch-mascot">
+                    </div>
+                    <div class="game-launch-copy">
+                        <p class="game-launch-kicker">&#24247;&#22969;&#20986;&#38988;&#20013;&#65292;&#28204;&#28204;&#30475;&#20320;&#30340;&#29105;&#37327;&#30452;&#35258;</p>
+                        <div class="game-launch-meta">
+                            <span class="game-launch-pill">5 &#38988;&#24555;&#31572;</span>
+                            <span class="game-launch-pill">&#29105;&#37327;&#30452;&#35258;</span>
+                            <span class="game-launch-pill">&#39184;&#30418;&#24314;&#35696;</span>
+                        </div>
+                        <p class="game-side-eyebrow">&#29609;&#27861;&#37325;&#40670;</p>
+                        <ul class="game-side-list">
+                            <li>&#27599;&#23616;&#22238;&#31572; 5 &#38988;&#20581;&#24247;&#23567;&#21839;&#31572;&#65292;&#36984;&#20986;&#20320;&#35469;&#28858;&#26356;&#31526;&#21512;&#30446;&#27161;&#30340;&#31572;&#26696;</li>
+                            <li>&#27599;&#38988;&#37117;&#26371;&#31435;&#21363;&#25552;&#31034;&#37325;&#40670;&#65292;&#24171;&#20320;&#26356;&#24555;&#29702;&#35299;&#29105;&#37327;&#33287;&#39640;&#34507;&#30333;&#36984;&#25799;</li>
+                            <li>&#32080;&#26463;&#24460;&#26371;&#32066;&#32080;&#20320;&#30340;&#20581;&#24247;&#30452;&#35258;&#39006;&#22411;&#65292;&#20006;&#25512;&#34214;&#36969;&#21512;&#30340;&#39184;&#30418;</li>
+                        </ul>
+                    </div>
+                    <div class="game-launch-actions">
+                        <button id="openQuizModalButton" type="button" class="btn-primary text-white rounded-full font-bold px-8 py-4 shadow-md">&#38283;&#22987;&#25361;&#25136;</button>
+                    </div>
+                    <p class="game-launch-note">&#29992; 5 &#38988;&#24555;&#21839;&#24555;&#31572;&#65292;&#36319;&#33879;&#24247;&#22969;&#19968;&#36215;&#25226;&#29105;&#37327;&#35264;&#24565;&#35722;&#24471;&#26356;&#30452;&#35258;&#12290;</p>
+                </div>
+            </div>
+
+            <div id="gameExperience" class="game-shell rounded-[2.5rem] border border-orange-100 shadow-xl overflow-hidden">
+                <div class="game-layout grid xl:grid-cols-[minmax(0,1.2fr)_340px]">
+                    <div class="game-stage-wrap p-4 md:p-6 xl:p-7">
+                        <div class="game-meta-panel">
+                        <div class="game-stage-topbar">
+                            <button id="gameCloseButton" type="button" class="game-close-button hidden" aria-label="關閉遊戲">×</button>
+                        </div>
+                        <div class="game-hud grid grid-cols-3 gap-3 mb-3" aria-live="polite">
+                            <div class="game-stat-card">
+                                <span class="game-stat-label">分數</span>
+                                <strong id="gameScoreValue" class="game-stat-value">0</strong>
+                            </div>
+                            <div class="game-stat-card">
+                                <span class="game-stat-label">生命</span>
+                                <strong id="gameLivesValue" class="game-stat-value">3</strong>
+                            </div>
+                            <div class="game-stat-card">
+                                <span class="game-stat-label">剩餘秒數</span>
+                                <strong id="gameTimeValue" class="game-stat-value">40</strong>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="game-canvas-shell">
+                            <canvas id="jinggeRushCanvas" width="1280" height="720" aria-label="京哥今日限定挑戰遊戲畫面"></canvas>
+                            <div id="gameOverlay" class="game-overlay">
+                                <div class="game-panel">
+                                    <p id="gameOverlayEyebrow" class="game-panel-eyebrow">準備出發</p>
+                                    <h3 id="gameOverlayTitle" class="game-panel-title">接住健康餐，避開炸物與含糖飲</h3>
+                                    <p id="gameOverlayText" class="game-panel-text">桌機可用左右方向鍵，手機可用下方按鈕。40 秒內拿越高分，結束後就能看推薦餐盒。</p>
+                                    <div id="gameOverlayResults" class="game-overlay-results hidden">
+                                        <p id="gameOverlayRank" class="game-result-rank">外送準備中</p>
+                                        <p id="gameOverlaySummary" class="game-result-summary">完成一局後，這裡會顯示適合你的餐盒推薦。</p>
+                                        <div id="gameOverlayRecommendedMeals" class="game-recommended-list">
+                                            <p class="game-placeholder-text">推薦餐盒將在遊戲結束後出現。</p>
+                                        </div>
+                                    </div>
+                                    <div class="game-panel-actions">
+                                        <button id="gameStartButton" type="button" class="btn-primary text-white rounded-full font-bold px-6 py-3 shadow-md">開始遊戲</button>
+                                        <button id="gameRestartButton" type="button" class="hidden bg-white text-slate-700 rounded-full font-bold px-6 py-3 border border-slate-200">再玩一次</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="game-controls game-controls-overlay">
+                            <button id="gameLeftButton" type="button" class="game-control-button" aria-label="向左移動">向左</button>
+                            <button id="gameRightButton" type="button" class="game-control-button" aria-label="向右移動">向右</button>
+                        </div>
+                    </div>
+
+                    <aside class="game-side-panel p-4 md:p-6 xl:p-7">
+                        <div class="game-side-grid">
+                        <div class="game-side-card">
+                            <p class="game-side-eyebrow">玩法重點</p>
+                            <ul class="game-side-list">
+                                <li>接住健康餐盒、花椰菜、雞胸肉可加分</li>
+                                <li>撞到炸雞、薯條、珍奶會扣生命</li>
+                                <li>保冷箱可短暫護盾，連續接健康食材可衝高分</li>
+                            </ul>
+                        </div>
+
+                        <div id="gameResultCard" class="game-side-card game-result-card">
+                            <p class="game-side-eyebrow">本局結果</p>
+                            <h3 id="gameRankLabel" class="game-result-rank">外送準備中</h3>
+                            <p id="gameResultSummary" class="game-result-summary">完成一局後，這裡會顯示你的健康外送稱號與推薦方向。</p>
+                            <div id="gameRecommendedMeals" class="game-recommended-list">
+                                <p class="game-placeholder-text">推薦餐盒將在遊戲結束後出現。</p>
+                            </div>
+                            <div class="game-cta-row">
+                                <a href="#menu" id="gameMenuCta" class="btn-primary text-white rounded-full font-bold px-5 py-3 text-center shadow-md">看推薦餐盒</a>
+                                <button id="gameOrderButton" type="button" class="bg-white text-brand-orange rounded-full font-bold px-5 py-3 border border-orange-200">立即訂餐</button>
+                            </div>
+                        </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+            <div id="gameBackdrop" class="game-backdrop hidden" aria-hidden="true"></div>
+            <div id="quizGameExperience" class="quiz-game-shell hidden" aria-hidden="true">
+                <div class="quiz-game-frame">
+                    <div class="quiz-game-topbar">
+                        <div class="quiz-game-brand">
+                            <img src="https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/%E4%BA%AC%E7%B0%A1%E5%BA%B7-%E5%85%AC%E4%BB%94-AI%E5%AE%8C%E6%95%B4%E6%AA%94-09.png" alt="&#24247;&#22969;" class="quiz-game-mascot">
+                            <div>
+                                <p class="quiz-game-eyebrow">Mini Quiz</p>
+                                <h3 id="quizGameTitle" class="quiz-game-title">&#24247;&#22969;&#29105;&#37327;&#24555;&#21839;&#24555;&#31572;</h3>
+                            </div>
+                        </div>
+                        <button id="quizGameCloseButton" type="button" class="game-close-button" aria-label="&#38364;&#38281;&#24555;&#21839;&#24555;&#31572;">&#215;</button>
+                    </div>
+                    <div class="quiz-game-progress">
+                        <div class="quiz-game-progress-copy">
+                            <span id="quizProgressLabel">&#31532; 1 &#38988; / 5</span>
+                            <strong id="quizScoreLabel">0 &#20998;</strong>
+                        </div>
+                        <div class="quiz-game-progress-bar">
+                            <span id="quizProgressFill"></span>
+                        </div>
+                    </div>
+                    <div class="quiz-game-card">
+                        <p id="quizQuestionEyebrow" class="quiz-question-eyebrow">&#29105;&#37327;&#30452;&#35258;&#28204;&#35430;</p>
+                        <h4 id="quizQuestionTitle" class="quiz-question-title">&#28310;&#20633;&#22909;&#23601;&#36319;&#33879;&#24247;&#22969;&#19968;&#36215;&#38283;&#22987;&#21543;</h4>
+                        <p id="quizQuestionText" class="quiz-question-text">&#27599;&#38988;&#36984;&#19968;&#20491;&#20320;&#35469;&#28858;&#26356;&#36969;&#21512;&#30340;&#31572;&#26696;&#65292;&#32080;&#26463;&#24460;&#26371;&#30475;&#21040;&#20320;&#30340;&#20581;&#24247;&#30452;&#35258;&#39006;&#22411;&#12290;</p>
+                        <div id="quizChoices" class="quiz-choices"></div>
+                        <div id="quizFeedback" class="quiz-feedback hidden">
+                            <p id="quizFeedbackTitle" class="quiz-feedback-title"></p>
+                            <p id="quizFeedbackText" class="quiz-feedback-text"></p>
+                        </div>
+                        <div id="quizResultPanel" class="quiz-result-panel hidden">
+                            <p id="quizResultRank" class="quiz-result-rank"></p>
+                            <p id="quizResultSummary" class="quiz-result-summary"></p>
+                            <div id="quizResultMeals" class="quiz-result-meals"></div>
+                        </div>
+                    </div>
+                    <div class="quiz-game-actions">
+                        <button id="quizStartButton" type="button" class="btn-primary text-white rounded-full font-bold px-6 py-3 shadow-md">&#38283;&#22987;&#20316;&#31572;</button>
+                        <button id="quizNextButton" type="button" class="bg-white text-slate-700 rounded-full font-bold px-6 py-3 border border-slate-200 hidden">&#19979;&#19968;&#38988;</button>
+                        <button id="quizRestartButton" type="button" class="bg-white text-slate-700 rounded-full font-bold px-6 py-3 border border-slate-200 hidden">&#20877;&#29609;&#19968;&#27425;</button>
+                    </div>
+                </div>
+            </div>
+            <div id="quizGameBackdrop" class="game-backdrop hidden" aria-hidden="true"></div>
+        </div>
+    </section>
+
+    <section id="menu" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-wider uppercase text-center">健康。新餐食</h2>
+                <div class="w-12 h-1.5 bg-brand-orange mx-auto rounded-full mt-4"></div>
+                <p class="text-slate-500 mt-6 tracking-[0.2em] font-medium uppercase text-center">全系列 12 款精選餐盒，營養均衡、每日新鮮供應</p>
+                <p class="text-slate-400 mt-2 text-sm text-center">每份餐盒皆附有完整營養標示，健身飲控輕鬆紀錄。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="mealContainer"></div>
+        </div>
+    </section>
+
+    <!-- 服務據點 -->
+    <section id="locations" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-12 tracking-wider uppercase">服務據點</h2>
+            <div id="locationContainer" class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                <div class="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-200 hover:border-brand-orange transition-colors text-center flex flex-col h-full">
+                    <h3 class="text-2xl font-bold text-brand-orange mb-4">台北延平店</h3>
+                    <div class="store-info-block">
+                    <p class="store-info store-address text-slate-600 text-sm mb-2">📍 台北市中正區延平南路171巷1號</p>
+                    <p class="store-info store-phone text-slate-600 text-sm mb-8">📞 02-2331-5166</p>
+                    <p class="store-info store-hours text-slate-600 text-sm mb-1">平日 10:30~20:00 | 周六 11:00-19:30 | 周日公休</p>
+                    <p class="store-info store-reg text-slate-600 text-sm mb-6">食品業者登錄字號：A-122721208-00161-0</p>
+                    
+                    </div>
+                    <div class="flex gap-3 mt-auto pt-2">
+                        <a href="https://reurl.cc/E4peRK" target="_blank" rel="noopener noreferrer" class="flex-[1.5] py-3 btn-primary text-white rounded-xl text-base font-bold text-center">立即訂餐</a>
+                    </div>
+                </div>
+                <div class="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-200 hover:border-brand-orange transition-colors text-center flex flex-col h-full">
+                    <h3 class="text-2xl font-bold text-brand-orange mb-4">台北伊通店</h3>
+                    <div class="store-info-block">
+                    <p class="store-info store-address text-slate-600 text-sm mb-2">📍 台北市中山區伊通街109之2號</p>
+                    <p class="store-info store-phone text-slate-600 text-sm mb-8">📞 02-2507-9662</p>
+                    <p class="store-info store-hours text-slate-600 text-sm mb-1">平日 10:30~20:00 | 周六 11:00-19:30 | 周日公休</p>
+                    <p class="store-info store-reg text-slate-600 text-sm mb-6">食品業者登錄字號：A-122721208-00162-1</p>
+                    
+                    </div>
+                    <div class="flex gap-3 mt-auto pt-2">
+                        <a href="https://reurl.cc/yYQGMO" target="_blank" rel="noopener noreferrer" class="flex-[1.5] py-3 btn-primary text-white rounded-xl text-base font-bold text-center">立即訂餐</a>
+                    </div>
+                </div>
+                <div class="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-200 hover:border-brand-orange transition-colors text-center flex flex-col h-full">
+                    <h3 class="text-2xl font-bold text-brand-orange mb-4">三峽北大店</h3>
+                    <div class="store-info-block">
+                    <p class="store-info store-address text-slate-600 text-sm mb-2">📍 新北市三峽區學成路250號</p>
+                    <p class="store-info store-phone text-slate-600 text-sm mb-8">📞 02-2673-6012</p>
+                    <p class="store-info store-hours text-slate-600 text-sm mb-1">平日 10:30~20:00 | 假日 11:00-20:00</p>
+                    <p class="store-info store-reg text-slate-600 text-sm mb-6">食品業者登錄字號：F-122721208-00169-3</p>
+                    
+                    </div>
+                    <div class="flex gap-3 mt-auto pt-2">
+                        <a href="https://ddc.ai/1bblEe" target="_blank" rel="noopener noreferrer" class="flex-[1.5] py-3 btn-primary text-white rounded-xl text-base font-bold text-center">立即訂餐</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 線上點餐門市選擇彈窗 (Modal) -->
+    <div id="storeModal" class="fixed inset-0 z-[200] hidden items-center justify-center bg-brand-dark/80 backdrop-blur-sm p-4">
+        <div class="bg-white w-full max-w-md rounded-[3rem] overflow-hidden shadow-2xl relative">
+            <div class="btn-primary p-8 text-white text-center">
+                <h3 class="text-2xl font-black tracking-widest">請選擇點餐門市</h3>
+                <p class="text-sm opacity-90 mt-2 tracking-widest">選取後將導往線上點餐系統</p>
+            </div>
+            <div id="storeModalLinks" class="p-8 space-y-4">
+                <button type="button" data-open-url="https://reurl.cc/E4peRK" class="store-link-button w-full py-5 bg-slate-50 hover:bg-brand-orange hover:text-white rounded-2xl font-bold text-slate-700 transition-all border border-slate-100 flex items-center justify-center gap-3 group">
+                    <span class="store-link-copy">
+                        <strong>台北延平店</strong>
+                        <small>中正區人氣門市</small>
+                    </span>
+                    <svg class="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </button>
+                <button type="button" data-open-url="https://reurl.cc/yYQGMO" class="store-link-button w-full py-5 bg-slate-50 hover:bg-brand-orange hover:text-white rounded-2xl font-bold text-slate-700 transition-all border border-slate-100 flex items-center justify-center gap-3 group">
+                    <span class="store-link-copy">
+                        <strong>台北伊通店</strong>
+                        <small>商務午餐首選</small>
+                    </span>
+                    <svg class="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </button>
+                <button type="button" data-open-url="https://ddc.ai/1bblEe" class="store-link-button w-full py-5 bg-slate-50 hover:bg-brand-orange hover:text-white rounded-2xl font-bold text-slate-700 transition-all border border-slate-100 flex items-center justify-center gap-3 group">
+                    <span class="store-link-copy">
+                        <strong>三峽北大店</strong>
+                        <small>新北輕食熱點</small>
+                    </span>
+                    <svg class="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </button>
+                <button id="closeStoreModalButton" type="button" class="w-full py-4 text-slate-400 font-medium hover:text-slate-600 transition-colors text-sm">取消點餐</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI 聊天管家 (京哥) -->
+
+    <!-- ??????? -->
+
+    <div id="toast">訊息</div>
+
+    <!-- 頁尾 -->
+
+    <footer class="bg-brand-dark text-white py-24 text-center relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="flex flex-row items-center justify-center gap-2 sm:gap-6 md:gap-12 lg:gap-16 mb-16">
+                <!-- 1. 京哥 -->
+                <div class="flex flex-col items-center shrink-0">
+                    <img src="https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/京簡康-公仔-AI完整檔-04.png" class="h-16 sm:h-20 md:h-28 w-auto mascot-float drop-shadow-lg" alt="京哥">
+                    <p class="hidden sm:block text-[10px] font-bold text-slate-400 mt-2 tracking-widest">京哥</p>
+                </div>
+                <!-- 2. FB 粉絲團 -->
+                <a href="https://www.facebook.com/JingJianKang2021" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center shrink-0">
+                    <div class="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center transition-all duration-500 bg-gradient-to-br from-[#1877F2] to-[#0A52B5] hover:scale-110 shadow-lg group-hover:shadow-[0_0_20px_rgba(24,119,242,0.5)]">
+                        <svg class="w-5 h-5 sm:w-7 sm:h-7 fill-white" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.728 0 1.325-.597 1.325-1.325V1.325C24 .597 23.403 0 22.675 0z"/></svg>
+                    </div>
+                    <span class="hidden md:block text-[10px] font-black text-slate-500 mt-3 tracking-tighter group-hover:text-white transition-colors">FACEBOOK</span>
+                </a>
+                <!-- 3. 中央 Logo -->
+                <div class="shrink-0 px-2 sm:px-4">
+                    <div class="bg-white rounded-2xl px-3 py-2 shadow-lg">
+                        <img src="https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/京簡康-LOGO-給廠商-03.png" alt="Logo" class="h-10 sm:h-16 md:h-24 w-auto object-contain">
+                    </div>
+                </div>
+                <!-- 4. LINE 官方 -->
+                <a href="https://lin.ee/5qgDoSu" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center shrink-0">
+                    <div class="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center transition-all duration-500 bg-gradient-to-br from-[#06C755] to-[#059F44] hover:scale-110 shadow-lg group-hover:shadow-[0_0_20px_rgba(6,199,85,0.4)]">
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8 fill-white" viewBox="0 0 24 24"><path d="M24 10.304c0-4.369-5.383-7.904-12-7.904s-12 3.535-12 7.904c0 3.921 4.279 7.21 10.074 7.853.392.081.926.258 1.054.592.146.381.096.975.046 1.358l-.198 1.202c-.061.363-.284 1.419 1.22 0.775 1.504-.644 8.125-4.782 11.077-8.182 1.516-1.742 2.727-3.704 2.727-5.6z"/></svg>
+                    </div>
+                    <span class="hidden md:block text-[10px] font-black text-slate-500 mt-3 tracking-tighter group-hover:text-white transition-colors">LINE</span>
+                </a>
+                <!-- 5. 康妹 -->
+                <div class="flex flex-col items-center shrink-0">
+                    <img src="https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/京簡康-公仔-AI完整檔-09.png" class="h-16 sm:h-20 md:h-28 w-auto mascot-float drop-shadow-lg" alt="康妹">
+                    <p class="hidden sm:block text-[10px] font-bold text-slate-400 mt-2 tracking-widest">康妹</p>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-white/5">
+                <p class="text-brand-orange text-sm font-bold tracking-[0.4em] mb-4 uppercase">京簡康 - 健康新餐食</p>
+                <p class="footer-copyright">&copy; 2024 JING JIAN KANG. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    
+</body>
+</html>
