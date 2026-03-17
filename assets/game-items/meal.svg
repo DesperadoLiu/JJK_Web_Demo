@@ -1,0 +1,41 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="mealBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF7ED"/>
+      <stop offset="100%" stop-color="#FFD7B0"/>
+    </linearGradient>
+    <linearGradient id="mealTray" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F6B376"/>
+      <stop offset="100%" stop-color="#E77831"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#A24D1E" flood-opacity="0.24"/>
+    </filter>
+  </defs>
+  <circle cx="128" cy="128" r="118" fill="url(#mealBg)"/>
+  <g opacity="0.45">
+    <circle cx="76" cy="74" r="16" fill="#FFF4E2"/>
+    <circle cx="182" cy="66" r="12" fill="#FFF4E2"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="42" y="70" width="172" height="116" rx="30" fill="url(#mealTray)"/>
+    <rect x="56" y="84" width="144" height="90" rx="22" fill="#FFFDF8"/>
+    <path d="M128 84V174" stroke="#EBC8A2" stroke-width="4"/>
+    <path d="M56 126H200" stroke="#EBC8A2" stroke-width="4"/>
+    <g>
+      <rect x="70" y="96" width="48" height="58" rx="16" fill="#8FD48D"/>
+      <circle cx="86" cy="112" r="10" fill="#4BAA59"/>
+      <circle cx="100" cy="122" r="11" fill="#3E9F4E"/>
+      <circle cx="89" cy="137" r="10" fill="#59B868"/>
+    </g>
+    <g>
+      <path d="M145 102C154 92 170 92 180 102C189 112 188 127 176 136C163 146 147 141 141 127C138 118 139 108 145 102Z" fill="#F2A261"/>
+      <path d="M147 107C154 101 165 101 172 107" stroke="#D86E2C" stroke-width="4" stroke-linecap="round"/>
+      <path d="M149 121C157 127 166 127 174 121" stroke="#D86E2C" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    <g>
+      <path d="M74 86C79 78 88 75 96 79C103 82 108 90 108 98C96 100 84 96 74 86Z" fill="#F9D96F"/>
+      <circle cx="101" cy="89" r="8" fill="#FFE8AE"/>
+    </g>
+  </g>
+</svg>

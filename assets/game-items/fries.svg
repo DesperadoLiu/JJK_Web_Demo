@@ -1,0 +1,27 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="friesBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FEF2F2"/>
+      <stop offset="100%" stop-color="#FECACA"/>
+    </linearGradient>
+    <linearGradient id="carton" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FB7185"/>
+      <stop offset="100%" stop-color="#DC2626"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#9C1F1F" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+  <circle cx="128" cy="128" r="118" fill="url(#friesBg)"/>
+  <g filter="url(#shadow)">
+    <rect x="80" y="72" width="16" height="74" rx="8" fill="#FCD34D"/>
+    <rect x="102" y="58" width="16" height="88" rx="8" fill="#FDE68A"/>
+    <rect x="124" y="64" width="16" height="82" rx="8" fill="#FACC15"/>
+    <rect x="146" y="54" width="16" height="92" rx="8" fill="#FDE047"/>
+    <rect x="168" y="70" width="16" height="76" rx="8" fill="#FCD34D"/>
+    <path d="M76 110H180L170 188C168 200 158 208 146 208H110C98 208 88 200 86 188Z" fill="url(#carton)"/>
+    <path d="M88 126H168L162 168C160 178 152 186 142 186H114C104 186 96 178 94 168Z" fill="#F14D4D"/>
+    <circle cx="128" cy="152" r="11" fill="#FFF0D9"/>
+    <path d="M118 152C124 147 132 147 138 152C132 156 124 156 118 152Z" fill="#FFE9CB"/>
+  </g>
+</svg>
