@@ -370,22 +370,45 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
     object-fit: contain;
     filter: drop-shadow(0 12px 18px rgba(15, 23, 42, 0.08));
     opacity: 0.94;
+    will-change: transform;
 }
 
 .no-ai-page .mobile-menu-mascot-jing {
-    height: 5.35rem;
+    height: 6.1rem;
     transform: translateX(0.3rem) rotate(8deg);
     transform-origin: bottom center;
+    animation: mobileMascotBobLeft 3.8s ease-in-out infinite;
 }
 
 .no-ai-page .mobile-menu-mascot-kang {
-    height: 5.65rem;
+    height: 6.45rem;
     transform: translateX(-0.3rem) rotate(-8deg);
     transform-origin: bottom center;
+    animation: mobileMascotBobRight 4.2s ease-in-out infinite;
 }
 
 .no-ai-page.weather-night .mobile-menu-mascots {
     border-top-color: rgba(148, 184, 224, 0.12);
+}
+
+@keyframes mobileMascotBobLeft {
+    0%,
+    100% {
+        transform: translateX(0.3rem) translateY(0) rotate(8deg);
+    }
+    50% {
+        transform: translateX(0.3rem) translateY(-0.3rem) rotate(6deg);
+    }
+}
+
+@keyframes mobileMascotBobRight {
+    0%,
+    100% {
+        transform: translateX(-0.3rem) translateY(0) rotate(-8deg);
+    }
+    50% {
+        transform: translateX(-0.3rem) translateY(-0.34rem) rotate(-6deg);
+    }
 }
 
 .no-ai-page.weather-night #closeMobileMenuButton {
