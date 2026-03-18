@@ -643,6 +643,7 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
     justify-content: center;
     align-items: center;
     align-self: stretch;
+    pointer-events: none;
 }
 
 .no-ai-page .game-launch-badge {
@@ -727,6 +728,8 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
     justify-content: flex-start;
     align-items: center;
     min-width: 0;
+    position: relative;
+    z-index: 1;
 }
 
 .no-ai-page #openGameModalButton {
