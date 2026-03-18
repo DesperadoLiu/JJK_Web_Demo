@@ -151,6 +151,7 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
 }
 
 .no-ai-page .mobile-drawer-panel {
+    position: relative;
     transform: translateX(100%);
     transition: transform 0.28s ease;
     border-left: 1px solid var(--weather-nav-border);
@@ -160,22 +161,81 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
     -webkit-backdrop-filter: blur(18px) saturate(1.08);
 }
 
+.no-ai-page .mobile-drawer-panel::before {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    top: 0.85rem;
+    height: 2.4rem;
+    border-radius: 999px;
+    background:
+        radial-gradient(circle at 18% 50%, rgba(242, 141, 72, 0.16) 0%, rgba(242, 141, 72, 0) 36%),
+        radial-gradient(circle at 82% 45%, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 34%);
+    filter: blur(10px);
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+.no-ai-page .mobile-drawer-panel::after {
+    content: '';
+    position: absolute;
+    inset: 0.45rem;
+    border-radius: 1.55rem 0 0 1.55rem;
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.26),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    pointer-events: none;
+}
+
 .no-ai-page .mobile-drawer-backdrop {
     backdrop-filter: blur(4px);
     background: rgba(15, 23, 42, 0.4);
 }
 
 .no-ai-page .mobile-drawer-panel .border-b {
+    position: relative;
     border-color: var(--weather-nav-border) !important;
 }
 
+.no-ai-page .mobile-drawer-panel .border-b::before {
+    content: '';
+    position: absolute;
+    left: 0.15rem;
+    right: 3.6rem;
+    top: -0.18rem;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.28) 72%, rgba(255, 255, 255, 0) 100%);
+    opacity: 0.88;
+    pointer-events: none;
+}
+
+.no-ai-page .mobile-drawer-panel .border-b::after {
+    content: '';
+    position: absolute;
+    left: 0.15rem;
+    right: 0.15rem;
+    bottom: -1px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.46) 24%, rgba(255, 255, 255, 0.18) 74%, rgba(255, 255, 255, 0) 100%);
+    pointer-events: none;
+}
+
 .no-ai-page .mobile-drawer-panel .text-slate-800 {
+    position: relative;
+    z-index: 1;
     color: var(--weather-chip-title) !important;
     letter-spacing: 0.05em;
 }
 
 .no-ai-page .mobile-drawer.mobile-drawer-open .mobile-drawer-panel {
     transform: translateX(0);
+}
+
+.no-ai-page .mobile-drawer-panel > * {
+    position: relative;
+    z-index: 1;
 }
 
 .no-ai-page .nav-menu-btn {
@@ -206,17 +266,29 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
 }
 
 .no-ai-page .mobile-menu-link {
+    position: relative;
+    overflow: hidden;
     display: block;
     font-size: 1.05rem;
     border-radius: 1rem;
     padding: 0.75rem 1rem;
     color: #475569 !important;
-    border: 1px solid rgba(255, 255, 255, 0.56);
+    border: 1px solid rgba(255, 255, 255, 0.42);
     background: rgba(255, 255, 255, 0.58);
     box-shadow:
         0 8px 22px rgba(15, 23, 42, 0.04),
-        inset 0 1px 0 rgba(255, 255, 255, 0.72);
+        inset 0 1px 0 rgba(255, 255, 255, 0.72),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.08);
     transition: all 0.2s ease;
+}
+
+.no-ai-page .mobile-menu-link::before {
+    content: '';
+    position: absolute;
+    inset: 0.6px;
+    border-radius: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    pointer-events: none;
 }
 
 .no-ai-page .mobile-menu-link:hover,
@@ -227,7 +299,8 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
     border-color: rgba(242, 141, 72, 0.22);
     box-shadow:
         0 12px 28px rgba(15, 23, 42, 0.06),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
     outline: none;
 }
 
@@ -256,11 +329,16 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
 
 .no-ai-page.weather-night .mobile-menu-link {
     color: #dbe9f8 !important;
-    border-color: rgba(148, 184, 224, 0.16);
+    border-color: rgba(148, 184, 224, 0.14);
     background: rgba(255, 255, 255, 0.08);
     box-shadow:
         0 12px 26px rgba(3, 10, 24, 0.18),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        inset 0 0 0 1px rgba(148, 184, 224, 0.03);
+}
+
+.no-ai-page.weather-night .mobile-menu-link::before {
+    border-color: rgba(214, 233, 252, 0.1);
 }
 
 .no-ai-page.weather-night .mobile-menu-link:hover,
@@ -268,6 +346,41 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
     background: rgba(255, 255, 255, 0.12);
     color: #f6fbff !important;
     border-color: rgba(148, 184, 224, 0.28);
+    box-shadow:
+        0 14px 28px rgba(3, 10, 24, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 0 0 1px rgba(148, 184, 224, 0.04);
+}
+
+.no-ai-page .mobile-menu-mascots {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 1.1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.no-ai-page .mobile-menu-mascot {
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 18px rgba(15, 23, 42, 0.08));
+    opacity: 0.94;
+}
+
+.no-ai-page .mobile-menu-mascot-jing {
+    height: 4.6rem;
+    transform: rotate(-5deg);
+}
+
+.no-ai-page .mobile-menu-mascot-kang {
+    height: 4.9rem;
+    transform: rotate(4deg);
+}
+
+.no-ai-page.weather-night .mobile-menu-mascots {
+    border-top-color: rgba(148, 184, 224, 0.12);
 }
 
 .no-ai-page.weather-night #closeMobileMenuButton {
@@ -282,6 +395,59 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
 .no-ai-page.weather-night #closeMobileMenuButton:hover {
     background: rgba(255, 255, 255, 0.14);
     color: #ffffff !important;
+}
+
+.no-ai-page.weather-dawn .mobile-drawer-panel::before {
+    background:
+        radial-gradient(circle at 18% 50%, rgba(255, 202, 147, 0.22) 0%, rgba(255, 202, 147, 0) 36%),
+        radial-gradient(circle at 82% 45%, rgba(255, 236, 210, 0.16) 0%, rgba(255, 236, 210, 0) 34%);
+}
+
+.no-ai-page.weather-sunny .mobile-drawer-panel::before,
+.no-ai-page.weather-summer .mobile-drawer-panel::before {
+    background:
+        radial-gradient(circle at 18% 50%, rgba(247, 187, 112, 0.22) 0%, rgba(247, 187, 112, 0) 36%),
+        radial-gradient(circle at 82% 45%, rgba(255, 244, 223, 0.16) 0%, rgba(255, 244, 223, 0) 34%);
+}
+
+.no-ai-page.weather-dusk .mobile-drawer-panel::before {
+    background:
+        radial-gradient(circle at 18% 50%, rgba(233, 156, 115, 0.22) 0%, rgba(233, 156, 115, 0) 36%),
+        radial-gradient(circle at 82% 45%, rgba(255, 225, 201, 0.14) 0%, rgba(255, 225, 201, 0) 34%);
+}
+
+.no-ai-page.weather-mist .mobile-drawer-panel::before,
+.no-ai-page.weather-cloudy .mobile-drawer-panel::before {
+    background:
+        radial-gradient(circle at 18% 50%, rgba(178, 204, 225, 0.22) 0%, rgba(178, 204, 225, 0) 36%),
+        radial-gradient(circle at 82% 45%, rgba(242, 248, 253, 0.14) 0%, rgba(242, 248, 253, 0) 34%);
+}
+
+.no-ai-page.weather-rainy .mobile-drawer-panel::before {
+    background:
+        radial-gradient(circle at 18% 50%, rgba(145, 182, 214, 0.24) 0%, rgba(145, 182, 214, 0) 36%),
+        radial-gradient(circle at 82% 45%, rgba(220, 233, 245, 0.12) 0%, rgba(220, 233, 245, 0) 34%);
+}
+
+.no-ai-page.weather-night .mobile-drawer-panel::before {
+    background:
+        radial-gradient(circle at 18% 50%, rgba(118, 170, 229, 0.24) 0%, rgba(118, 170, 229, 0) 36%),
+        radial-gradient(circle at 82% 45%, rgba(196, 222, 248, 0.08) 0%, rgba(196, 222, 248, 0) 34%);
+}
+
+.no-ai-page.weather-night .mobile-drawer-panel::after {
+    border-color: rgba(148, 184, 224, 0.18);
+    box-shadow:
+        inset 0 1px 0 rgba(214, 233, 252, 0.14),
+        inset 0 0 0 1px rgba(148, 184, 224, 0.04);
+}
+
+.no-ai-page.weather-night .mobile-drawer-panel .border-b::before {
+    background: linear-gradient(90deg, rgba(214, 233, 252, 0.56) 0%, rgba(214, 233, 252, 0.16) 72%, rgba(214, 233, 252, 0) 100%);
+}
+
+.no-ai-page.weather-night .mobile-drawer-panel .border-b::after {
+    background: linear-gradient(90deg, rgba(138, 175, 215, 0.1) 0%, rgba(214, 233, 252, 0.34) 28%, rgba(214, 233, 252, 0.12) 74%, rgba(214, 233, 252, 0) 100%);
 }
 
 .no-ai-page .mobile-only-menu-btn,
