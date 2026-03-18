@@ -883,6 +883,187 @@ function createJinggeRushGame() {
 
     let rafId = 0;
     let lastFrameAt = 0;
+    let audioContext = null;
+    let audioUnlocked = false;
+    let bgmLoopTimer = 0;
+    let bgmStartAt = 0;
+
+    function ensureAudioContext() {
+        if (audioContext) return audioContext;
+        const AudioContextCtor = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextCtor) return null;
+        audioContext = new AudioContextCtor();
+        return audioContext;
+    }
+
+    async function unlockGameAudio() {
+        const ctx = ensureAudioContext();
+        if (!ctx) return false;
+        if (ctx.state === 'suspended') {
+            try {
+                await ctx.resume();
+            } catch (_error) {
+                return false;
+            }
+        }
+        audioUnlocked = ctx.state === 'running';
+        return audioUnlocked;
+    }
+
+    function playTone(options) {
+        const ctx = ensureAudioContext();
+        if (!ctx || !audioUnlocked) return;
+
+        const {
+            frequency = 440,
+            duration = 0.12,
+            type = 'sine',
+            volume = 0.04,
+            attack = 0.01,
+            release = 0.08,
+            detune = 0,
+            when = 0,
+        } = options;
+
+        const startAt = ctx.currentTime + when;
+        const endAt = startAt + duration;
+        const oscillator = ctx.createOscillator();
+        const gainNode = ctx.createGain();
+
+        oscillator.type = type;
+        oscillator.frequency.setValueAtTime(frequency, startAt);
+        oscillator.detune.setValueAtTime(detune, startAt);
+
+        gainNode.gain.setValueAtTime(0.0001, startAt);
+        gainNode.gain.exponentialRampToValueAtTime(Math.max(0.0001, volume), startAt + attack);
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, endAt + release);
+
+        oscillator.connect(gainNode);
+        gainNode.connect(ctx.destination);
+
+        oscillator.start(startAt);
+        oscillator.stop(endAt + release + 0.02);
+    }
+
+    function playGameSound(kind) {
+        if (!audioUnlocked) return;
+        if (kind === 'start') {
+            playTone({ frequency: 392, duration: 0.06, type: 'square', volume: 0.034, release: 0.04 });
+            playTone({ frequency: 523.25, duration: 0.07, type: 'square', volume: 0.036, when: 0.08, release: 0.05 });
+            playTone({ frequency: 659.25, duration: 0.08, type: 'square', volume: 0.04, when: 0.16, release: 0.05 });
+            playTone({ frequency: 783.99, duration: 0.1, type: 'triangle', volume: 0.025, when: 0.23, release: 0.08 });
+            return;
+        }
+        if (kind === 'good') {
+            playTone({ frequency: 880, duration: 0.045, type: 'square', volume: 0.03, release: 0.025 });
+            playTone({ frequency: 1174.66, duration: 0.06, type: 'square', volume: 0.026, when: 0.04, release: 0.035 });
+            return;
+        }
+        if (kind === 'shield') {
+            playTone({ frequency: 523.25, duration: 0.06, type: 'triangle', volume: 0.028, release: 0.03 });
+            playTone({ frequency: 659.25, duration: 0.08, type: 'square', volume: 0.026, when: 0.05, release: 0.04 });
+            playTone({ frequency: 880, duration: 0.1, type: 'triangle', volume: 0.022, when: 0.11, release: 0.08 });
+            playTone({ frequency: 1046.5, duration: 0.08, type: 'sine', volume: 0.018, when: 0.16, release: 0.08 });
+            return;
+        }
+        if (kind === 'bad') {
+            playTone({ frequency: 196, duration: 0.07, type: 'sawtooth', volume: 0.03, release: 0.03 });
+            playTone({ frequency: 146.83, duration: 0.09, type: 'square', volume: 0.022, when: 0.045, release: 0.04 });
+            playTone({ frequency: 110, duration: 0.12, type: 'triangle', volume: 0.016, when: 0.095, release: 0.06 });
+            return;
+        }
+        if (kind === 'end') {
+            playTone({ frequency: 659.25, duration: 0.08, type: 'square', volume: 0.026, release: 0.03 });
+            playTone({ frequency: 523.25, duration: 0.09, type: 'square', volume: 0.024, when: 0.09, release: 0.04 });
+            playTone({ frequency: 392, duration: 0.12, type: 'triangle', volume: 0.022, when: 0.18, release: 0.08 });
+            playTone({ frequency: 261.63, duration: 0.18, type: 'sine', volume: 0.016, when: 0.28, release: 0.12 });
+        }
+    }
+
+    function stopGameBgm() {
+        if (bgmLoopTimer) {
+            window.clearTimeout(bgmLoopTimer);
+            bgmLoopTimer = 0;
+        }
+    }
+
+    function scheduleBgmBar(startAt) {
+        const ctx = ensureAudioContext();
+        if (!ctx || !audioUnlocked || state.mode !== 'playing') return;
+
+        const beat = 0.3;
+        const bassNotes = [261.63, 261.63, 293.66, 329.63, 349.23, 329.63, 293.66, 261.63];
+        const leadNotes = [659.25, 783.99, 880, 783.99, 659.25, 783.99, 987.77, 880];
+        const sparkleNotes = [1046.5, 1174.66, 1046.5, 1318.51];
+
+        bassNotes.forEach((frequency, index) => {
+            playTone({
+                frequency,
+                when: startAt - ctx.currentTime + (index * beat),
+                duration: 0.1,
+                type: 'triangle',
+                volume: 0.011,
+                attack: 0.006,
+                release: 0.045,
+            });
+        });
+
+        leadNotes.forEach((frequency, index) => {
+            playTone({
+                frequency,
+                when: startAt - ctx.currentTime + (index * beat) + 0.15,
+                duration: 0.07,
+                type: 'square',
+                volume: 0.01,
+                attack: 0.004,
+                release: 0.028,
+            });
+        });
+
+        sparkleNotes.forEach((frequency, index) => {
+            playTone({
+                frequency,
+                when: startAt - ctx.currentTime + (index * beat * 2) + 0.22,
+                duration: 0.055,
+                type: 'sine',
+                volume: 0.0055,
+                attack: 0.003,
+                release: 0.03,
+            });
+        });
+
+        playTone({
+            frequency: 196,
+            when: startAt - ctx.currentTime,
+            duration: beat * 8,
+            type: 'sine',
+            volume: 0.0035,
+            attack: 0.02,
+            release: 0.08,
+        });
+    }
+
+    function queueGameBgm() {
+        const ctx = ensureAudioContext();
+        if (!ctx || !audioUnlocked || state.mode !== 'playing') return;
+
+        const barDuration = 2.4;
+        if (!bgmStartAt || bgmStartAt < ctx.currentTime) {
+            bgmStartAt = ctx.currentTime + 0.05;
+        }
+
+        scheduleBgmBar(bgmStartAt);
+        bgmStartAt += barDuration;
+        bgmLoopTimer = window.setTimeout(() => {
+            queueGameBgm();
+        }, Math.max(200, (barDuration * 1000) - 180));
+    }
+
+    function startGameBgm() {
+        stopGameBgm();
+        bgmStartAt = 0;
+        queueGameBgm();
+    }
 
     function getViewportPreset() {
         const isDesktopLandscape = window.innerWidth >= 1024;
@@ -1070,14 +1251,16 @@ function createJinggeRushGame() {
 
     function closeGameModal() {
         stopLoop();
+        stopGameBgm();
         document.body.classList.remove('game-modal-open');
         gameBackdrop?.classList.add('hidden');
         gameCloseButton?.classList.add('hidden');
         resetGame();
     }
 
-    function startGame() {
+    async function startGame() {
         resizeGameViewport();
+        await unlockGameAudio();
         openGameModal();
         state.mode = 'playing';
         state.score = 0;
@@ -1090,13 +1273,17 @@ function createJinggeRushGame() {
         state.player.y = canvas.height - (document.body.classList.contains('game-modal-landscape') ? 96 : 110);
         syncHud();
         setOverlay(false, '', '', '', false);
+        playGameSound('start');
+        startGameBgm();
         startLoop();
     }
 
     function endGame(reason) {
         state.mode = 'gameover';
         stopLoop();
+        stopGameBgm();
         syncHud();
+        playGameSound('end');
         const result = chooseMealsByScore(state.score);
         rankLabel.textContent = result.rank;
         resultSummary.textContent = result.summary;
@@ -1133,15 +1320,21 @@ function createJinggeRushGame() {
     function collectItem(item) {
         if (item.kind === 'good') {
             state.score += item.value;
+            playGameSound('good');
             return;
         }
         if (item.kind === 'shield') {
             state.score += item.value;
             state.shieldMs = Math.max(state.shieldMs, item.shieldMs);
+            playGameSound('shield');
             return;
         }
-        if (state.shieldMs > 0) return;
+        if (state.shieldMs > 0) {
+            playGameSound('shield');
+            return;
+        }
         state.lives -= item.damage || 1;
+        playGameSound('bad');
         if (state.lives <= 0) endGame('lives');
     }
 
