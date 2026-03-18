@@ -1414,8 +1414,13 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
         grid-template-columns: 1fr;
     }
 
+    .no-ai-page .game-launch-visual {
+        padding-top: 3.6rem;
+        min-height: 12.5rem;
+    }
+
     .no-ai-page .game-launch-badge {
-        top: 0.85rem;
+        top: 0.15rem;
         transform: translate(-50%, 0);
         font-size: 0.72rem;
         padding: 0.38rem 0.82rem;
@@ -1423,6 +1428,7 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
 
     .no-ai-page .game-launch-mascot {
         width: min(100%, 138px);
+        margin-top: 0.5rem;
         transform: rotate(0deg);
     }
 
