@@ -39,6 +39,15 @@ const mealTagsById = {
 
 const DEFAULT_MENU_DATA = menuData.map((meal) => ({ ...meal }));
 const DEFAULT_MENU_BY_ID = new Map(DEFAULT_MENU_DATA.map((meal) => [meal.id, meal]));
+const TAIPEI_WEATHER_URL = 'https://api.open-meteo.com/v1/forecast?latitude=25.0375&longitude=121.5637&current=weather_code,is_day,cloud_cover,precipitation,rain,showers,snowfall,temperature_2m,apparent_temperature&daily=sunrise,sunset,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTaipei&forecast_days=1';
+const WEATHER_THEME_CLASSES = ['weather-dawn', 'weather-sunny', 'weather-summer', 'weather-dusk', 'weather-mist', 'weather-cloudy', 'weather-rainy', 'weather-night'];
+const weatherThemeLabel = document.getElementById('weatherThemeLabel');
+const themeSwitcher = document.getElementById('themeSwitcher');
+const themeSwitcherToggle = document.getElementById('themeSwitcherToggle');
+const themeSwitcherPanel = document.getElementById('themeSwitcherPanel');
+const themeSwitcherButtons = Array.from(document.querySelectorAll('.theme-switcher-chip'));
+let automaticWeatherTheme = null;
+let manualWeatherTheme = null;
 
 const legacyQuizQuestions = [
     {
@@ -1834,7 +1843,197 @@ function createCaloriesQuizGame() {
     return { openQuizModal, closeQuizModal };
 }
 
+function applyWeatherTheme(theme, label) {
+    const body = document.body;
+    WEATHER_THEME_CLASSES.forEach((className) => body.classList.remove(className));
+    body.classList.add(`weather-${theme}`);
+    body.dataset.weatherTheme = theme;
+    if (weatherThemeLabel && label) {
+        const titleNode = weatherThemeLabel.querySelector('.hero-weather-chip-title');
+        if (titleNode) {
+            titleNode.textContent = label;
+        } else {
+            weatherThemeLabel.textContent = label;
+        }
+    }
+}
+
+function syncThemeSwitcherState() {
+    themeSwitcherButtons.forEach((button) => {
+        const mode = button.dataset.themeMode;
+        const label = button.dataset.themeLabel || '';
+        const isActive = manualWeatherTheme
+            ? (mode === manualWeatherTheme.theme && label === manualWeatherTheme.label)
+            : mode === 'auto';
+        button.classList.toggle('is-active', isActive);
+    });
+}
+
+function setWeatherThemeSelection(selection) {
+    if (!selection) return;
+    applyWeatherTheme(selection.theme, selection.label);
+    syncThemeSwitcherState();
+}
+
+function closeThemeSwitcher() {
+    if (!themeSwitcherPanel || !themeSwitcherToggle || !themeSwitcher) return;
+    themeSwitcherPanel.classList.add('hidden');
+    themeSwitcherToggle.setAttribute('aria-expanded', 'false');
+    themeSwitcher.classList.remove('is-open');
+}
+
+function openThemeSwitcher() {
+    if (!themeSwitcherPanel || !themeSwitcherToggle || !themeSwitcher) return;
+    themeSwitcherPanel.classList.remove('hidden');
+    themeSwitcherToggle.setAttribute('aria-expanded', 'true');
+    themeSwitcher.classList.add('is-open');
+}
+
+function toggleThemeSwitcher() {
+    if (!themeSwitcherPanel) return;
+    const isHidden = themeSwitcherPanel.classList.contains('hidden');
+    if (isHidden) {
+        openThemeSwitcher();
+    } else {
+        closeThemeSwitcher();
+    }
+}
+
+function fallbackWeatherTheme() {
+    const taipeiNow = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Taipei' }));
+    const hour = taipeiNow.getHours();
+    return {
+        theme: (hour >= 18 || hour < 6) ? 'night' : 'sunny',
+        label: (hour >= 18 || hour < 6) ? '靜藍夜幕' : '晴光暖晨',
+    };
+}
+
+function resolveDayPhase(currentTime, sunriseText, sunsetText) {
+    const current = new Date(currentTime);
+    const sunrise = sunriseText ? new Date(sunriseText) : null;
+    const sunset = sunsetText ? new Date(sunsetText) : null;
+    if (!sunrise || !sunset || Number.isNaN(sunrise.getTime()) || Number.isNaN(sunset.getTime()) || Number.isNaN(current.getTime())) {
+        const hour = current.getHours();
+        if (hour >= 17 && hour < 19) return 'dusk';
+        if (hour >= 5 && hour < 7) return 'dawn';
+        return (hour >= 19 || hour < 5) ? 'night' : 'day';
+    }
+
+    const dawnEnd = sunrise.getTime() + (75 * 60 * 1000);
+    const duskStart = sunset.getTime() - (75 * 60 * 1000);
+    if (current.getTime() < sunrise.getTime() || current.getTime() > sunset.getTime()) return 'night';
+    if (current.getTime() <= dawnEnd) return 'dawn';
+    if (current.getTime() >= duskStart) return 'dusk';
+    return 'day';
+}
+
+function resolveWeatherTheme(current, daily) {
+    const weatherCode = Number(current?.weather_code ?? 0);
+    const isDay = Number(current?.is_day ?? 1) === 1;
+    const cloudCover = Number(current?.cloud_cover ?? 0);
+    const temperature = Number(current?.temperature_2m ?? current?.apparent_temperature ?? 24);
+    const precipitation = Number(current?.precipitation ?? 0)
+        + Number(current?.rain ?? 0)
+        + Number(current?.showers ?? 0)
+        + Number(current?.snowfall ?? 0);
+    const dayPhase = resolveDayPhase(current?.time, daily?.sunrise?.[0], daily?.sunset?.[0]);
+
+    const rainyCodes = new Set([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 71, 73, 75, 77, 80, 81, 82, 85, 86, 95, 96, 99]);
+    const cloudyCodes = new Set([2, 3, 45, 48]);
+
+    if (!isDay || dayPhase === 'night') {
+        return { theme: 'night', label: temperature >= 28 ? '暖夜海風' : '靜藍夜幕' };
+    }
+
+    if (precipitation > 0.1 || rainyCodes.has(weatherCode)) {
+        if (dayPhase === 'dawn') return { theme: 'rainy', label: '晨雨微霧' };
+        if (dayPhase === 'dusk') return { theme: 'rainy', label: '暮雨輕幕' };
+        return { theme: 'rainy', label: temperature <= 20 ? '涼雨青灰' : '雨幕微涼' };
+    }
+
+    if (cloudCover >= 65 || cloudyCodes.has(weatherCode)) {
+        if (dayPhase === 'dawn') return { theme: 'cloudy', label: '晨霧薄光' };
+        if (dayPhase === 'dusk') return { theme: 'cloudy', label: '暮雲緩光' };
+        return { theme: 'cloudy', label: temperature <= 20 ? '涼霧雲層' : '雲影漫行' };
+    }
+
+    if (dayPhase === 'dawn') return { theme: 'sunny', label: '晴光暖晨' };
+    if (dayPhase === 'dusk') return { theme: 'sunny', label: '暮金餘暉' };
+    if (temperature >= 30) return { theme: 'sunny', label: '盛夏晴朗' };
+    if (temperature <= 20) return { theme: 'sunny', label: '清朗微光' };
+    return { theme: 'sunny', label: '日晴輕暖' };
+}
+
+function fallbackWeatherTheme() {
+    const taipeiNow = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Taipei' }));
+    const hour = taipeiNow.getHours();
+    return {
+        theme: (hour >= 18 || hour < 6) ? 'night' : (hour < 8 ? 'dawn' : 'sunny'),
+        label: (hour >= 18 || hour < 6) ? '靜藍夜幕' : (hour < 8 ? '晨曦薄霧' : '清朗微光'),
+    };
+}
+
+function resolveWeatherTheme(current, daily) {
+    const weatherCode = Number(current?.weather_code ?? 0);
+    const isDay = Number(current?.is_day ?? 1) === 1;
+    const cloudCover = Number(current?.cloud_cover ?? 0);
+    const temperature = Number(current?.temperature_2m ?? current?.apparent_temperature ?? 24);
+    const precipitation = Number(current?.precipitation ?? 0)
+        + Number(current?.rain ?? 0)
+        + Number(current?.showers ?? 0)
+        + Number(current?.snowfall ?? 0);
+    const dayPhase = resolveDayPhase(current?.time, daily?.sunrise?.[0], daily?.sunset?.[0]);
+
+    const rainyCodes = new Set([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 71, 73, 75, 77, 80, 81, 82, 85, 86, 95, 96, 99]);
+    const mistCodes = new Set([2, 45, 48]);
+
+    if (!isDay || dayPhase === 'night') {
+        return { theme: 'night', label: temperature >= 28 ? '暖夜海風' : '靜藍夜幕' };
+    }
+
+    if (precipitation > 0.1 || rainyCodes.has(weatherCode)) {
+        if (dayPhase === 'dawn') return { theme: 'rainy', label: '晨雨微霧' };
+        if (dayPhase === 'dusk') return { theme: 'rainy', label: '暮雨輕幕' };
+        return { theme: 'rainy', label: temperature <= 20 ? '涼雨青灰' : '雨幕微涼' };
+    }
+
+    if (cloudCover >= 78 || weatherCode === 3) {
+        if (dayPhase === 'dusk') return { theme: 'cloudy', label: '暮雲緩光' };
+        return { theme: 'cloudy', label: temperature <= 20 ? '涼霧雲層' : '雲影漫行' };
+    }
+
+    if (cloudCover >= 45 || mistCodes.has(weatherCode)) {
+        if (dayPhase === 'dawn') return { theme: 'mist', label: '晨霧薄光' };
+        return { theme: 'mist', label: temperature <= 22 ? '薄霧清晨' : '輕霧柔光' };
+    }
+
+    if (dayPhase === 'dawn') return { theme: 'dawn', label: '晨曦薄霧' };
+    if (dayPhase === 'dusk') return { theme: 'dusk', label: '暮金餘暉' };
+    if (temperature >= 30) return { theme: 'summer', label: '盛夏晴朗' };
+    if (temperature <= 20) return { theme: 'sunny', label: '清朗微光' };
+    return { theme: 'sunny', label: '日晴輕暖' };
+}
+
+async function initWeatherTheme() {
+    const fallback = fallbackWeatherTheme();
+    automaticWeatherTheme = fallback;
+    setWeatherThemeSelection(manualWeatherTheme || automaticWeatherTheme);
+
+    try {
+        const response = await fetch(TAIPEI_WEATHER_URL, { method: 'GET' });
+        if (!response.ok) throw new Error(`weather_http_${response.status}`);
+        const payload = await response.json();
+        automaticWeatherTheme = resolveWeatherTheme(payload?.current || {}, payload?.daily || {});
+        setWeatherThemeSelection(manualWeatherTheme || automaticWeatherTheme);
+    } catch (_error) {
+        const fallbackAgain = fallbackWeatherTheme();
+        automaticWeatherTheme = fallbackAgain;
+        setWeatherThemeSelection(manualWeatherTheme || automaticWeatherTheme);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    void initWeatherTheme();
     renderMenu();
     bindEvents();
     initCalorieCalculator();
@@ -1845,5 +2044,48 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('img').forEach((img, index) => {
         if (index > 2) img.loading = 'lazy';
         img.decoding = 'async';
+    });
+
+    if (themeSwitcherToggle && themeSwitcherPanel) {
+        themeSwitcherToggle.addEventListener('click', (event) => {
+            event.stopPropagation();
+            toggleThemeSwitcher();
+        });
+    }
+
+    if (themeSwitcher) {
+        themeSwitcherPanel?.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
+        themeSwitcherButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                const mode = button.dataset.themeMode;
+                if (mode === 'auto') {
+                    manualWeatherTheme = null;
+                    setWeatherThemeSelection(automaticWeatherTheme || fallbackWeatherTheme());
+                    closeThemeSwitcher();
+                    return;
+                }
+                manualWeatherTheme = {
+                    theme: mode,
+                    label: button.dataset.themeLabel || button.textContent.trim(),
+                };
+                setWeatherThemeSelection(manualWeatherTheme);
+                closeThemeSwitcher();
+            });
+        });
+        syncThemeSwitcherState();
+    }
+
+    document.addEventListener('click', (event) => {
+        if (!themeSwitcher || !themeSwitcherPanel || themeSwitcherPanel.classList.contains('hidden')) return;
+        if (themeSwitcher.contains(event.target)) return;
+        closeThemeSwitcher();
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && themeSwitcher && themeSwitcher.classList.contains('is-open')) {
+            closeThemeSwitcher();
+        }
     });
 });

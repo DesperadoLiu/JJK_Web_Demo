@@ -21,7 +21,7 @@
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), browsing-topics=(), interest-cohort=()">
     <!-- 安全強化：導入內容安全政策 (CSP) -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data: https://formosachangcoltd.wpcomstaging.com https://videos.files.wordpress.com; media-src 'self' blob: https://videos.files.wordpress.com; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-src 'none'; form-action 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data: https://formosachangcoltd.wpcomstaging.com https://videos.files.wordpress.com; media-src 'self' blob: https://videos.files.wordpress.com; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.open-meteo.com; frame-src 'none'; form-action 'self'; upgrade-insecure-requests; block-all-mixed-content;">
     
     <title>京簡康｜健康餐盒外送與門市訂餐</title>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -85,6 +85,34 @@
             <p class="hero-brand-eyebrow">JING JIAN KANG</p>
             <h1 class="hero-brand-title">京選食材，簡單純粹</h1>
             <p class="hero-brand-text">健康新餐食，從每日都能安心持續的一份餐盒開始。</p>
+            <div class="theme-switcher hero-theme-switcher" id="themeSwitcher" aria-label="背景主題切換器">
+                <button type="button" class="hero-weather-chip" id="themeSwitcherToggle" aria-expanded="false" aria-controls="themeSwitcherPanel">
+                    <span class="hero-weather-chip-copy" id="weatherThemeLabel" aria-live="polite">
+                        <span class="hero-weather-chip-eyebrow">台北此刻天氣，為你換上配色</span>
+                        <strong class="hero-weather-chip-title">晴光暖晨</strong>
+                    </span>
+                    <span class="hero-weather-chip-action">
+                        <span class="hero-weather-chip-action-text">點此更換主題</span>
+                        <span class="hero-weather-chip-chevron" aria-hidden="true"></span>
+                    </span>
+                </button>
+                <div class="theme-switcher-panel hidden" id="themeSwitcherPanel">
+                    <p class="theme-switcher-eyebrow">想換個氛圍，也可以自己挑選喜歡的主題</p>
+                    <div class="theme-switcher-actions">
+                        <button type="button" class="theme-switcher-chip is-active" data-theme-mode="auto">跟著天氣自動切換</button>
+                        <button type="button" class="theme-switcher-chip" data-theme-mode="dawn" data-theme-label="晨曦薄霧">晨曦薄霧</button>
+                        <button type="button" class="theme-switcher-chip" data-theme-mode="sunny" data-theme-label="清朗微光">清朗微光</button>
+                        <button type="button" class="theme-switcher-chip" data-theme-mode="summer" data-theme-label="盛夏晴朗">盛夏晴朗</button>
+                        <button type="button" class="theme-switcher-chip" data-theme-mode="dusk" data-theme-label="暮金餘暉">暮金餘暉</button>
+                        <button type="button" class="theme-switcher-chip" data-theme-mode="mist" data-theme-label="晨霧薄光">晨霧薄光</button>
+                        <button type="button" class="theme-switcher-chip" data-theme-mode="cloudy" data-theme-label="雲影漫行">雲影漫行</button>
+                        <button type="button" class="theme-switcher-chip" data-theme-mode="rainy" data-theme-label="晨雨微霧">晨雨微霧</button>
+                        <button type="button" class="theme-switcher-chip" data-theme-mode="rainy" data-theme-label="雨幕微涼">雨幕微涼</button>
+                        <button type="button" class="theme-switcher-chip" data-theme-mode="night" data-theme-label="靜藍夜幕">靜藍夜幕</button>
+                        <button type="button" class="theme-switcher-chip" data-theme-mode="night" data-theme-label="暖夜海風">暖夜海風</button>
+                    </div>
+                </div>
+            </div>
             <div class="hero-brand-meta">
                 <span>均衡營養</span>
                 <span>少油清爽</span>
