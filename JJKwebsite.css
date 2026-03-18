@@ -355,8 +355,11 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
 .no-ai-page .mobile-menu-mascots {
     display: flex;
     align-items: flex-end;
-    justify-content: center;
-    gap: 1rem;
+    justify-content: space-between;
+    width: min(100%, 12.5rem);
+    margin-left: auto;
+    margin-right: auto;
+    gap: 0.35rem;
     margin-top: auto;
     padding-top: 1.1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.16);
@@ -370,13 +373,15 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
 }
 
 .no-ai-page .mobile-menu-mascot-jing {
-    height: 4.6rem;
-    transform: rotate(-5deg);
+    height: 5.35rem;
+    transform: translateX(0.3rem) rotate(8deg);
+    transform-origin: bottom center;
 }
 
 .no-ai-page .mobile-menu-mascot-kang {
-    height: 4.9rem;
-    transform: rotate(4deg);
+    height: 5.65rem;
+    transform: translateX(-0.3rem) rotate(-8deg);
+    transform-origin: bottom center;
 }
 
 .no-ai-page.weather-night .mobile-menu-mascots {
