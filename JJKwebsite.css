@@ -454,6 +454,7 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
     padding: 1.95rem 2rem;
     box-shadow: 0 28px 44px rgba(60, 52, 44, 0.06);
     backdrop-filter: blur(12px);
+    min-width: 0;
 }
 
 .no-ai-page .game-launch-kicker {
@@ -489,6 +490,7 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    min-width: 0;
 }
 
 .no-ai-page #openGameModalButton {
@@ -513,6 +515,11 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
     letter-spacing: 0.04em;
     line-height: 1.85;
     opacity: 0.92;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    min-height: 3.7rem;
+    margin: 0;
 }
 
 .no-ai-page .mini-game-grid {
@@ -1404,6 +1411,7 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
 
     .no-ai-page .game-launch-inner {
         padding: 1.35rem;
+        grid-template-columns: 1fr;
     }
 
     .no-ai-page .game-launch-badge {
@@ -1428,6 +1436,7 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
 
     .no-ai-page .game-launch-note {
         font-size: 0.86rem;
+        text-align: center;
     }
 
     .no-ai-page .game-panel {
@@ -1481,6 +1490,33 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
 
     .no-ai-page .game-launch-inner {
         grid-template-columns: 180px minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        align-items: center;
+    }
+
+    .no-ai-page .game-launch-visual {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+    }
+
+    .no-ai-page .game-launch-copy {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .no-ai-page .game-launch-actions {
+        grid-column: 1;
+        grid-row: 2;
+        justify-content: center;
+        align-self: end;
+        min-height: 3.7rem;
+    }
+
+    .no-ai-page .game-launch-note {
+        grid-column: 2;
+        grid-row: 2;
+        align-self: center;
+        min-height: 3.7rem;
     }
 
     .no-ai-page .game-side-grid {
