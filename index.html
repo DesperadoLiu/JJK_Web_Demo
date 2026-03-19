@@ -91,8 +91,11 @@
             <p class="hero-brand-text">健康新餐食，從每日都能安心持續的一份餐盒開始。</p>
             <div class="theme-switcher hero-theme-switcher" id="themeSwitcher" aria-label="背景主題切換器">
                 <button type="button" class="hero-weather-chip" id="themeSwitcherToggle" aria-expanded="false" aria-controls="themeSwitcherPanel">
+                    <span class="hero-weather-chip-icon hero-weather-mascot" id="weatherThemeIcon" aria-hidden="true">
+                        <img src="https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/京簡康-公仔-AI完整檔-09.png" alt="康妹" class="hero-weather-mascot-image">
+                    </span>
                     <span class="hero-weather-chip-copy" id="weatherThemeLabel" aria-live="polite">
-                        <span class="hero-weather-chip-eyebrow">台北此刻天氣，為你換上配色</span>
+                        <span class="hero-weather-chip-eyebrow">台北此刻，心情配色</span>
                         <strong class="hero-weather-chip-title">晴光暖晨</strong>
                     </span>
                     <span class="hero-weather-chip-action">
@@ -117,6 +120,19 @@
                     </div>
                 </div>
             </div>
+            <aside class="hero-weather-glance" id="weatherGlance" aria-label="台北即時時間與溫度">
+                <span class="hero-weather-glance-icon hero-weather-chip-icon" id="weatherGlanceIcon" aria-hidden="true" data-weather-icon="sunny">
+                    <span class="hero-weather-chip-icon-core"></span>
+                </span>
+                <div class="hero-weather-glance-copy">
+                    <span class="hero-weather-glance-label">台北時間</span>
+                    <strong class="hero-weather-glance-time" id="taipeiClock">--:--:--</strong>
+                    <div class="hero-weather-glance-reading">
+                        <span class="hero-weather-glance-temp" id="taipeiTemperature">--°C</span>
+                        <span class="hero-weather-glance-meta" id="taipeiWeatherMeta">--</span>
+                    </div>
+                </div>
+            </aside>
             <div class="hero-brand-meta">
                 <span>均衡營養</span>
                 <span>少油清爽</span>

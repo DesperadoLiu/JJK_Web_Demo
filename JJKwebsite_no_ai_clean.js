@@ -41,13 +41,84 @@ const DEFAULT_MENU_DATA = menuData.map((meal) => ({ ...meal }));
 const DEFAULT_MENU_BY_ID = new Map(DEFAULT_MENU_DATA.map((meal) => [meal.id, meal]));
 const TAIPEI_WEATHER_URL = 'https://api.open-meteo.com/v1/forecast?latitude=25.0375&longitude=121.5637&current=weather_code,is_day,cloud_cover,precipitation,rain,showers,snowfall,temperature_2m,apparent_temperature&daily=sunrise,sunset,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTaipei&forecast_days=1';
 const WEATHER_THEME_CLASSES = ['weather-dawn', 'weather-sunny', 'weather-summer', 'weather-dusk', 'weather-mist', 'weather-cloudy', 'weather-rainy', 'weather-night'];
+const KANGMEI_MASCOT_IMAGE = 'https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/%E4%BA%AC%E7%B0%A1%E5%BA%B7-%E5%85%AC%E4%BB%94-AI%E5%AE%8C%E6%95%B4%E6%AA%94-09.png';
+const JINGGE_MASCOT_IMAGE = 'https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/%E4%BA%AC%E7%B0%A1%E5%BA%B7-%E5%85%AC%E4%BB%94-AI%E5%AE%8C%E6%95%B4%E6%AA%94-04.png';
 const weatherThemeLabel = document.getElementById('weatherThemeLabel');
+const weatherThemeIcon = document.getElementById('weatherThemeIcon');
+const weatherThemeMascotImage = weatherThemeIcon?.querySelector('.hero-weather-mascot-image') || null;
+const weatherGlanceIcon = document.getElementById('weatherGlanceIcon');
+const taipeiClock = document.getElementById('taipeiClock');
+const taipeiTemperature = document.getElementById('taipeiTemperature');
+const taipeiWeatherMeta = document.getElementById('taipeiWeatherMeta');
 const themeSwitcher = document.getElementById('themeSwitcher');
 const themeSwitcherToggle = document.getElementById('themeSwitcherToggle');
 const themeSwitcherPanel = document.getElementById('themeSwitcherPanel');
 const themeSwitcherButtons = Array.from(document.querySelectorAll('.theme-switcher-chip'));
 let automaticWeatherTheme = null;
 let manualWeatherTheme = null;
+let taipeiClockTimer = null;
+
+function renderWeatherChipIcon(theme) {
+    const iconThemeMap = {
+        dawn: 'dawn',
+        sunny: 'sunny',
+        summer: 'summer',
+        dusk: 'dusk',
+        mist: 'mist',
+        cloudy: 'cloudy',
+        rainy: 'rainy',
+        night: 'night',
+    };
+    const weatherIcon = iconThemeMap[theme] || 'sunny';
+    [weatherThemeIcon, weatherGlanceIcon].forEach((node) => {
+        if (node) node.dataset.weatherIcon = weatherIcon;
+    });
+    if (weatherThemeMascotImage) {
+        const isNightTheme = theme === 'night';
+        weatherThemeMascotImage.src = isNightTheme ? JINGGE_MASCOT_IMAGE : KANGMEI_MASCOT_IMAGE;
+        weatherThemeMascotImage.alt = isNightTheme ? '京哥' : '康妹';
+    }
+}
+
+function formatTaipeiClock(now = new Date()) {
+    return new Intl.DateTimeFormat('zh-TW', {
+        timeZone: 'Asia/Taipei',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+    }).format(now);
+}
+
+function formatTaipeiCalendar(now = new Date()) {
+    return new Intl.DateTimeFormat('zh-TW', {
+        timeZone: 'Asia/Taipei',
+        month: '2-digit',
+        day: '2-digit',
+        weekday: 'short',
+    }).format(now);
+}
+
+function renderTaipeiClock() {
+    if (!taipeiClock) return;
+    taipeiClock.textContent = formatTaipeiClock();
+}
+
+function startTaipeiClock() {
+    renderTaipeiClock();
+    if (taipeiClockTimer) window.clearInterval(taipeiClockTimer);
+    taipeiClockTimer = window.setInterval(renderTaipeiClock, 1000);
+}
+
+function updateTaipeiWeatherGlance(current = {}, label = '') {
+    const temperature = Number(current?.temperature_2m ?? current?.apparent_temperature);
+    if (taipeiTemperature) {
+        taipeiTemperature.textContent = Number.isFinite(temperature) ? `${Math.round(temperature)}°C` : '--°C';
+    }
+    if (taipeiWeatherMeta) {
+        taipeiWeatherMeta.textContent = formatTaipeiCalendar();
+    }
+}
 
 const legacyQuizQuestions = [
     {
@@ -1848,6 +1919,7 @@ function applyWeatherTheme(theme, label) {
     WEATHER_THEME_CLASSES.forEach((className) => body.classList.remove(className));
     body.classList.add(`weather-${theme}`);
     body.dataset.weatherTheme = theme;
+    renderWeatherChipIcon(theme);
     if (weatherThemeLabel && label) {
         const titleNode = weatherThemeLabel.querySelector('.hero-weather-chip-title');
         if (titleNode) {
@@ -2018,6 +2090,7 @@ async function initWeatherTheme() {
     const fallback = fallbackWeatherTheme();
     automaticWeatherTheme = fallback;
     setWeatherThemeSelection(manualWeatherTheme || automaticWeatherTheme);
+    updateTaipeiWeatherGlance({}, fallback.label);
 
     try {
         const response = await fetch(TAIPEI_WEATHER_URL, { method: 'GET' });
@@ -2025,14 +2098,17 @@ async function initWeatherTheme() {
         const payload = await response.json();
         automaticWeatherTheme = resolveWeatherTheme(payload?.current || {}, payload?.daily || {});
         setWeatherThemeSelection(manualWeatherTheme || automaticWeatherTheme);
+        updateTaipeiWeatherGlance(payload?.current || {}, automaticWeatherTheme.label);
     } catch (_error) {
         const fallbackAgain = fallbackWeatherTheme();
         automaticWeatherTheme = fallbackAgain;
         setWeatherThemeSelection(manualWeatherTheme || automaticWeatherTheme);
+        updateTaipeiWeatherGlance({}, fallbackAgain.label);
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    startTaipeiClock();
     void initWeatherTheme();
     renderMenu();
     bindEvents();
