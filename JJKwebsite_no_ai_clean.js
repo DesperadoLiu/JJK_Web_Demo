@@ -1752,14 +1752,18 @@ function createCaloriesQuizGame() {
     };
 
     const melody = [
-        { note: 523.25, length: 1.0 },
-        { note: 659.25, length: 1.0 },
-        { note: 587.33, length: 1.0 },
-        { note: 698.46, length: 1.0 },
-        { note: 659.25, length: 1.0 },
-        { note: 587.33, length: 0.8 },
-        { note: 523.25, length: 1.2 },
-        { note: 392.0, length: 1.0 },
+        { note: 659.25, length: 0.72, bass: 220.0, accent: true },
+        { note: 783.99, length: 0.56, bass: 220.0 },
+        { note: 880.0, length: 0.5, bass: 246.94 },
+        { note: 783.99, length: 0.5, bass: 246.94 },
+        { note: 698.46, length: 0.72, bass: 196.0, accent: true },
+        { note: 783.99, length: 0.52, bass: 196.0 },
+        { note: 880.0, length: 0.5, bass: 246.94 },
+        { note: 987.77, length: 0.82, bass: 246.94, accent: true },
+        { note: 880.0, length: 0.52, bass: 220.0 },
+        { note: 783.99, length: 0.52, bass: 220.0 },
+        { note: 698.46, length: 0.52, bass: 196.0 },
+        { note: 659.25, length: 0.9, bass: 196.0, accent: true },
     ];
 
     function ensureQuizMusicContext() {
@@ -1783,15 +1787,39 @@ function createCaloriesQuizGame() {
         if (!context || !quizMusic.masterGain) return;
         const oscillator = context.createOscillator();
         const gainNode = context.createGain();
+        const filter = context.createBiquadFilter();
         oscillator.type = 'triangle';
         oscillator.frequency.setValueAtTime(frequency, when);
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(1800, when);
         gainNode.gain.setValueAtTime(0.0001, when);
-        gainNode.gain.linearRampToValueAtTime(0.22, when + 0.04);
+        gainNode.gain.linearRampToValueAtTime(0.24, when + 0.02);
         gainNode.gain.exponentialRampToValueAtTime(0.001, when + duration);
-        oscillator.connect(gainNode);
+        oscillator.connect(filter);
+        filter.connect(gainNode);
         gainNode.connect(quizMusic.masterGain);
         oscillator.start(when);
         oscillator.stop(when + duration + 0.02);
+    }
+
+    function scheduleQuizBassPulse(frequency, when, accent = false) {
+        const context = ensureQuizMusicContext();
+        if (!context || !quizMusic.masterGain) return;
+        const oscillator = context.createOscillator();
+        const gainNode = context.createGain();
+        const filter = context.createBiquadFilter();
+        oscillator.type = 'square';
+        oscillator.frequency.setValueAtTime(frequency, when);
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(accent ? 220 : 180, when);
+        gainNode.gain.setValueAtTime(0.0001, when);
+        gainNode.gain.linearRampToValueAtTime(accent ? 0.14 : 0.09, when + 0.01);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, when + 0.18);
+        oscillator.connect(filter);
+        filter.connect(gainNode);
+        gainNode.connect(quizMusic.masterGain);
+        oscillator.start(when);
+        oscillator.stop(when + 0.22);
     }
 
     function ensureQuizAmbience() {
@@ -1826,14 +1854,15 @@ function createCaloriesQuizGame() {
         const playStep = () => {
             if (!quizMusic.isPlaying || !quizMusic.context) return;
             const step = melody[quizMusic.stepIndex % melody.length];
-            const duration = 0.42 * step.length;
+            const duration = 0.26 * step.length;
             const when = quizMusic.context.currentTime + 0.02;
             scheduleQuizTone(step.note, duration, when);
+            scheduleQuizBassPulse(step.bass, when, Boolean(step.accent));
             quizMusic.stepIndex += 1;
         };
 
         playStep();
-        quizMusic.stepTimer = window.setInterval(playStep, 520);
+        quizMusic.stepTimer = window.setInterval(playStep, 340);
     }
 
     function stopQuizMusic() {
