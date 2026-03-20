@@ -43,9 +43,9 @@
                 <div class="hidden md:flex items-center justify-between w-full max-w-3xl mx-8">
                     <a href="#about" class="nav-menu-btn text-slate-600 hover:text-brand-orange font-medium transition-colors text-sm lg:text-base whitespace-nowrap">品牌理念</a>
                     <a href="#news" class="nav-menu-btn text-slate-600 hover:text-brand-orange font-medium transition-colors text-sm lg:text-base whitespace-nowrap">最新消息</a>
+                    <a href="#menu" class="nav-menu-btn text-slate-600 hover:text-brand-orange font-medium transition-colors text-sm lg:text-base whitespace-nowrap">特色餐盒</a>
                     <a href="#calculator" class="nav-menu-btn text-slate-600 hover:text-brand-orange font-medium transition-colors text-sm lg:text-base whitespace-nowrap">熱量試算</a>
                     <a href="#game" class="nav-menu-btn text-slate-600 hover:text-brand-orange font-medium transition-colors text-sm lg:text-base whitespace-nowrap">互動遊戲</a>
-                    <a href="#menu" class="nav-menu-btn text-slate-600 hover:text-brand-orange font-medium transition-colors text-sm lg:text-base whitespace-nowrap">特色餐盒</a>
                     <a href="#locations" class="nav-menu-btn text-slate-600 hover:text-brand-orange font-medium transition-colors text-sm lg:text-base whitespace-nowrap">服務據點</a>
                 </div>
                 <div class="flex items-center gap-2">
@@ -72,9 +72,9 @@
             </div>
             <a href="#about" class="mobile-menu-link nav-menu-btn text-slate-600 hover:text-slate-900 font-light tracking-widest py-3">品牌理念</a>
             <a href="#news" class="mobile-menu-link nav-menu-btn text-slate-600 hover:text-slate-900 font-light tracking-widest py-3">最新消息</a>
+            <a href="#menu" class="mobile-menu-link nav-menu-btn text-slate-600 hover:text-slate-900 font-light tracking-widest py-3">特色餐盒</a>
             <a href="#calculator" class="mobile-menu-link nav-menu-btn text-slate-600 hover:text-slate-900 font-light tracking-widest py-3">熱量試算</a>
             <a href="#game" class="mobile-menu-link nav-menu-btn text-slate-600 hover:text-slate-900 font-light tracking-widest py-3">互動遊戲</a>
-            <a href="#menu" class="mobile-menu-link nav-menu-btn text-slate-600 hover:text-slate-900 font-light tracking-widest py-3">特色餐盒</a>
             <a href="#locations" class="mobile-menu-link nav-menu-btn text-slate-600 hover:text-slate-900 font-light tracking-widest py-3">服務據點</a>
             <div class="mobile-menu-mascots mt-auto pt-4" aria-hidden="true">
                 <img src="https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/京簡康-公仔-AI完整檔-04.png" class="mobile-menu-mascot mobile-menu-mascot-jing" alt="">
@@ -252,6 +252,30 @@
                     </div>
                 </a>
             </div>
+            <div class="mt-8 flex justify-center md:hidden">
+                <button
+                    id="toggleNewsCollapseButton"
+                    type="button"
+                    class="hidden items-center justify-center gap-2 rounded-full border border-orange-200 bg-white px-6 py-3 text-sm font-bold tracking-widest text-brand-orange shadow-sm transition-all active:scale-95"
+                    aria-expanded="false"
+                    aria-controls="newsContainer"
+                >
+                    查看更多消息
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特色餐點 -->
+    <section id="menu" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-wider uppercase text-center">健康。新餐食</h2>
+                <div class="w-12 h-1.5 bg-brand-orange mx-auto rounded-full mt-4"></div>
+                <p class="text-slate-500 mt-6 tracking-[0.2em] font-medium uppercase text-center">全系列 12 款精選餐盒，營養均衡、每日新鮮供應</p>
+                <p class="text-slate-400 mt-2 text-sm text-center">每份餐盒皆附有完整營養標示，健身飲控輕鬆紀錄。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="mealContainer"></div>
         </div>
     </section>
 
@@ -343,7 +367,7 @@
         </div>
     </section>
 
-    <!-- 特色餐點 -->
+    <!-- 互動遊戲 -->
     <section id="game" class="game-section py-24 bg-white relative overflow-hidden">
         <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-orange-50 to-transparent pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -532,18 +556,6 @@
                 </div>
             </div>
             <div id="quizGameBackdrop" class="game-backdrop hidden" aria-hidden="true"></div>
-        </div>
-    </section>
-
-    <section id="menu" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-wider uppercase text-center">健康。新餐食</h2>
-                <div class="w-12 h-1.5 bg-brand-orange mx-auto rounded-full mt-4"></div>
-                <p class="text-slate-500 mt-6 tracking-[0.2em] font-medium uppercase text-center">全系列 12 款精選餐盒，營養均衡、每日新鮮供應</p>
-                <p class="text-slate-400 mt-2 text-sm text-center">每份餐盒皆附有完整營養標示，健身飲控輕鬆紀錄。</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="mealContainer"></div>
         </div>
     </section>
 

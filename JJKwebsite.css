@@ -1769,6 +1769,160 @@ body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; }
     }
 }
 
+@media (min-width: 768px) and (max-width: 1199px) {
+    .no-ai-page > nav .flex.justify-between.h-20.items-center {
+        min-height: 6.75rem;
+        height: auto;
+        align-items: flex-start;
+        padding-top: 0.9rem;
+        padding-bottom: 0.9rem;
+    }
+
+    .no-ai-page > nav .hidden.md\:flex {
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.5rem 0.65rem;
+        max-width: 35rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        align-self: center;
+    }
+
+    .no-ai-page > nav .nav-menu-btn {
+        width: 100%;
+        padding: 0.45rem 0.55rem;
+        font-size: 0.82rem !important;
+        letter-spacing: 0.04em;
+    }
+
+    .no-ai-page #openStoreModalButton {
+        padding-inline: 1.35rem;
+        min-height: 2.95rem;
+        font-size: 0.92rem !important;
+        white-space: nowrap;
+    }
+
+    .no-ai-page .hero-brand-panel {
+        right: 1.5rem;
+        bottom: 1.5rem;
+        width: min(44vw, 27rem);
+        padding: 1.25rem 1.25rem 1.35rem;
+    }
+
+    .no-ai-page .hero-brand-title {
+        font-size: clamp(1.9rem, 3.2vw, 2.5rem);
+    }
+
+    .no-ai-page .hero-brand-text {
+        font-size: 0.96rem;
+        line-height: 1.65;
+    }
+
+    .no-ai-page #about,
+    .no-ai-page #video,
+    .no-ai-page #news,
+    .no-ai-page #menu,
+    .no-ai-page #calculator,
+    .no-ai-page #game,
+    .no-ai-page #locations {
+        padding-top: 6.5rem !important;
+        padding-bottom: 6.5rem !important;
+    }
+
+    .no-ai-page .about-heading {
+        margin-bottom: 3rem;
+    }
+
+    .no-ai-page .about-heading-mascot {
+        display: block !important;
+        height: 5.2rem;
+        opacity: 0.78;
+    }
+
+    .no-ai-page .about-heading-mascot-left {
+        left: 1.25rem;
+    }
+
+    .no-ai-page .about-heading-mascot-right {
+        right: 1.25rem;
+    }
+
+    .no-ai-page #newsContainer {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 1.4rem !important;
+    }
+
+    .no-ai-page #newsContainer > *:first-child {
+        grid-column: 1 / -1;
+    }
+
+    .no-ai-page #mealContainer {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 1.6rem !important;
+    }
+
+    .no-ai-page .calculator-form-wrap {
+        margin-left: 4%;
+        margin-right: 4%;
+    }
+
+    .no-ai-page .calculator-card {
+        padding: 2rem !important;
+        border-radius: 2rem !important;
+    }
+
+    .no-ai-page .calculator-card input,
+    .no-ai-page .calculator-card select {
+        font-size: 0.96rem;
+        padding: 0.9rem 1rem;
+    }
+
+    .no-ai-page .game-launch-inner {
+        grid-template-columns: 148px minmax(0, 1fr);
+        gap: 1.25rem;
+        padding: 1.6rem;
+    }
+
+    .no-ai-page .game-launch-copy {
+        padding: 1.4rem 1.35rem;
+        border-radius: 1.6rem;
+    }
+
+    .no-ai-page .game-launch-mascot {
+        width: min(100%, 168px);
+    }
+
+    .no-ai-page .game-launch-kicker {
+        font-size: 0.92rem;
+    }
+
+    .no-ai-page .game-launch-note {
+        font-size: 0.8rem;
+        line-height: 1.7;
+    }
+
+    .no-ai-page .game-side-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+    }
+
+    .no-ai-page #locationContainer {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 1.5rem !important;
+    }
+
+    .no-ai-page #locationContainer > *:last-child {
+        grid-column: 1 / -1;
+        max-width: 28rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .no-ai-page .store-info-block {
+        min-height: 14rem;
+    }
+}
+
 @media (min-width: 1280px) {
     .no-ai-page .game-side-grid {
         grid-template-columns: 1fr;

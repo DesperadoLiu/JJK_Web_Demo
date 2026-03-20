@@ -591,6 +591,40 @@ function renderNews(newsItems) {
     const container = document.getElementById('newsContainer');
     if (!container || !Array.isArray(newsItems) || !newsItems.length) return;
     container.replaceChildren(...newsItems.map(buildNewsCard));
+    updateMobileNewsVisibility();
+}
+
+let isMobileNewsExpanded = false;
+
+function updateMobileNewsVisibility() {
+    const container = document.getElementById('newsContainer');
+    const toggleButton = document.getElementById('toggleNewsCollapseButton');
+    if (!container || !toggleButton) return;
+
+    const cards = Array.from(container.children);
+    const isMobile = window.innerWidth < 768;
+    const shouldCollapse = isMobile && cards.length > 1;
+
+    cards.forEach((card, index) => {
+        card.classList.toggle('hidden', shouldCollapse && !isMobileNewsExpanded && index > 0);
+    });
+
+    toggleButton.classList.toggle('hidden', !shouldCollapse);
+    toggleButton.classList.toggle('inline-flex', shouldCollapse);
+    toggleButton.setAttribute('aria-expanded', shouldCollapse && isMobileNewsExpanded ? 'true' : 'false');
+    toggleButton.textContent = shouldCollapse && isMobileNewsExpanded ? '收合其他消息' : '查看更多消息';
+}
+
+function initMobileNewsCollapse() {
+    const toggleButton = document.getElementById('toggleNewsCollapseButton');
+    if (!toggleButton) return;
+
+    toggleButton.addEventListener('click', () => {
+        isMobileNewsExpanded = !isMobileNewsExpanded;
+        updateMobileNewsVisibility();
+    });
+
+    updateMobileNewsVisibility();
 }
 
 function buildLocationCard(item) {
@@ -2254,6 +2288,7 @@ document.addEventListener('DOMContentLoaded', () => {
     startTaipeiClock();
     void initWeatherTheme();
     renderMenu();
+    initMobileNewsCollapse();
     bindEvents();
     initCalorieCalculator();
     createJinggeRushGame();
@@ -2306,5 +2341,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.key === 'Escape' && themeSwitcher && themeSwitcher.classList.contains('is-open')) {
             closeThemeSwitcher();
         }
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) {
+            isMobileNewsExpanded = false;
+        }
+        updateMobileNewsVisibility();
     });
 });
