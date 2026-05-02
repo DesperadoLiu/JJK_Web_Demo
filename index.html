@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
@@ -21,7 +21,15 @@
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), browsing-topics=(), interest-cohort=()">
     <!-- 安全強化：導入內容安全政策 (CSP) -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data: https://formosachangcoltd.wpcomstaging.com https://videos.files.wordpress.com; media-src 'self' blob: https://videos.files.wordpress.com; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.open-meteo.com; frame-src 'none'; form-action 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data: https://formosachangcoltd.wpcomstaging.com https://videos.files.wordpress.com https://www.googletagmanager.com; media-src 'self' blob: https://videos.files.wordpress.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.open-meteo.com; frame-src https://www.googletagmanager.com; form-action 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-W3G5D7WT');</script>
+    <!-- End Google Tag Manager -->
     
     <title>京簡康｜健康餐盒外送與門市訂餐</title>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -30,6 +38,10 @@
     <script src="JJKwebsite_no_ai_clean.js" defer></script>
 </head>
 <body class="no-ai-page bg-slate-50 text-slate-800">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W3G5D7WT"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     <!-- 導覽列 -->
     <nav class="fixed w-full bg-white/95 backdrop-blur-xl shadow-sm z-[60]">
@@ -42,7 +54,6 @@
                 </div>
                 <div class="hidden md:flex items-center justify-between w-full max-w-3xl mx-8">
                     <a href="#about" class="nav-menu-btn text-slate-600 hover:text-brand-orange font-medium transition-colors text-sm lg:text-base whitespace-nowrap">品牌理念</a>
-                    <a href="#news" class="nav-menu-btn text-slate-600 hover:text-brand-orange font-medium transition-colors text-sm lg:text-base whitespace-nowrap">最新消息</a>
                     <a href="#menu" class="nav-menu-btn text-slate-600 hover:text-brand-orange font-medium transition-colors text-sm lg:text-base whitespace-nowrap">特色餐盒</a>
                     <a href="#calculator" class="nav-menu-btn text-slate-600 hover:text-brand-orange font-medium transition-colors text-sm lg:text-base whitespace-nowrap">熱量試算</a>
                     <a href="#game" class="nav-menu-btn text-slate-600 hover:text-brand-orange font-medium transition-colors text-sm lg:text-base whitespace-nowrap">互動遊戲</a>
@@ -52,7 +63,7 @@
                     <button id="openMobileMenuButton" type="button" class="mobile-only-menu-btn md:hidden w-11 h-11 rounded-xl border border-slate-200 text-slate-700 bg-white active:scale-95" aria-label="開啟快速選單" aria-expanded="false" aria-controls="mobileQuickMenu">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
-                    <!-- ???????? -->
+                    <!-- 線上點餐按鈕 -->
                     <button id="openStoreModalButton" type="button" class="btn-primary text-white px-8 py-3 rounded-full font-bold transition-all shadow-md active:scale-95 text-sm md:text-base">
                         線上點餐
                     </button>
@@ -71,7 +82,6 @@
                 </button>
             </div>
             <a href="#about" class="mobile-menu-link nav-menu-btn text-slate-600 hover:text-slate-900 font-light tracking-widest py-3">品牌理念</a>
-            <a href="#news" class="mobile-menu-link nav-menu-btn text-slate-600 hover:text-slate-900 font-light tracking-widest py-3">最新消息</a>
             <a href="#menu" class="mobile-menu-link nav-menu-btn text-slate-600 hover:text-slate-900 font-light tracking-widest py-3">特色餐盒</a>
             <a href="#calculator" class="mobile-menu-link nav-menu-btn text-slate-600 hover:text-slate-900 font-light tracking-widest py-3">熱量試算</a>
             <a href="#game" class="mobile-menu-link nav-menu-btn text-slate-600 hover:text-slate-900 font-light tracking-widest py-3">互動遊戲</a>
@@ -83,12 +93,17 @@
         </div>
     </div>
 
-    <!-- ???? -->
+    <!-- 首頁首屏 -->
     <section class="hero-bg h-[90vh] relative">
         <div class="hero-brand-panel">
             <p class="hero-brand-eyebrow">JING JIAN KANG</p>
             <h1 class="hero-brand-title">京選食材，簡單純粹</h1>
             <p class="hero-brand-text">健康新餐食，從每日都能安心持續的一份餐盒開始。</p>
+            <div class="hero-cta-row" aria-label="首頁主要操作">
+                <button type="button" class="hero-cta hero-cta-primary" data-open-store-modal="true">立即訂餐</button>
+                <a href="#menu" class="hero-cta hero-cta-secondary">看人氣餐盒</a>
+            </div>
+            <p class="hero-cta-note">先挑餐盒、再決定門市，會比從上到下慢慢找更省時間。</p>
             <div class="theme-switcher hero-theme-switcher" id="themeSwitcher" aria-label="背景主題切換器">
                 <button type="button" class="hero-weather-chip" id="themeSwitcherToggle" aria-expanded="false" aria-controls="themeSwitcherPanel">
                     <span class="hero-weather-chip-icon hero-weather-mascot" id="weatherThemeIcon" aria-hidden="true">
@@ -150,7 +165,7 @@
                 <img src="https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/京簡康-公仔-AI完整檔-09.png" class="about-heading-mascot about-heading-mascot-left hidden lg:block" alt="康妹">
                 <img src="https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/京簡康-公仔-AI完整檔-04.png" class="about-heading-mascot about-heading-mascot-right hidden lg:block" alt="京哥">
                 <p class="text-brand-orange font-medium tracking-[0.4em] mb-4 uppercase">忙碌生活，是否忘了好好照顧自己？</p>
-                <h1 class="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">京選食材，簡單純粹</h1>
+                <h2 class="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">京選食材，簡單純粹</h2>
                 <div class="w-24 h-1.5 bg-brand-orange mx-auto rounded-full mb-8 md:mb-9"></div>
                 <div class="max-w-3xl mx-auto">
                     <h2 class="text-2xl md:text-3xl font-bold text-slate-800 tracking-widest">關於京簡康</h2>
@@ -201,17 +216,14 @@
     </section>
 
     <!-- 最新消息 -->
-    <section id="news" class="py-24 bg-white">
+    <section id="news" class="py-24 bg-white news-secondary-section">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-end mb-12">
                 <div>
                     <h2 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-wider">最新消息</h2>
                     <div class="w-12 h-1.5 bg-brand-orange rounded-full mt-4"></div>
                 </div>
-                <a href="#" class="text-brand-orange font-bold hover:text-brand-dark transition-colors text-sm tracking-widest flex items-center gap-1">
-                    查看全部 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </a>
-            </div>
+                <p class="news-secondary-copy hidden md:block text-sm tracking-[0.18em] text-slate-400">精選品牌消息，放在首頁尾段，不打斷主要瀏覽流程。</p>
             <div id="newsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- 消息卡片 1 -->
                 <a href="#" class="group block overflow-hidden rounded-3xl bg-slate-50 border border-slate-100 hover:border-brand-orange/30 transition-all shadow-sm hover:shadow-md">
@@ -379,7 +391,8 @@
                 </p>
             </div>
 
-            <div class="game-launch-card rounded-[2.5rem] border border-orange-100 shadow-xl overflow-hidden">
+            <div class="game-launch-grid">
+            <div class="game-launch-card game-launch-card-primary rounded-[2.5rem] border border-orange-100 shadow-xl overflow-hidden">
                 <div class="game-launch-inner">
                     <div class="game-launch-visual">
                         <span class="game-launch-badge">SIGNATURE PLAY</span>
@@ -398,15 +411,14 @@
                             <li>&#38275;&#36991;&#28856;&#38622;&#12289;&#34223;&#26781;&#12289;&#29645;&#22902;&#65292;&#25758;&#21040;&#26371;&#25187;&#29983;&#21629;&#20540;</li>
                             <li>&#25343;&#21040;&#20445;&#20919;&#31665;&#21487;&#30701;&#26283;&#35703;&#30462;&#65292;&#32080;&#26463;&#24460;&#36996;&#26371;&#25512;&#34214;&#36969;&#21512;&#20320;&#30340;&#39184;&#30418;</li>
                         </ul>
-                    </div>
+                    <p class="game-launch-note">&#20197; 40 &#31186;&#23436;&#25104;&#19968;&#22580;&#36629;&#30408;&#34909;&#21050;&#65292;&#32080;&#26463;&#24460;&#28858;&#20320;&#21576;&#19978;&#36969;&#21512;&#30340;&#20581;&#24247;&#39184;&#30418;&#12290;</p>
                     <div class="game-launch-actions">
                         <button id="openGameModalButton" type="button" class="btn-primary text-white rounded-full font-bold px-8 py-4 shadow-md">&#38283;&#22987;&#36938;&#25138;</button>
                     </div>
-                    <p class="game-launch-note">&#20197; 40 &#31186;&#23436;&#25104;&#19968;&#22580;&#36629;&#30408;&#34909;&#21050;&#65292;&#32080;&#26463;&#24460;&#28858;&#20320;&#21576;&#19978;&#36969;&#21512;&#30340;&#20581;&#24247;&#39184;&#30418;&#12290;</p>
                 </div>
             </div>
 
-            <div class="game-launch-card quiz-launch-card rounded-[2.5rem] border border-orange-100 shadow-xl overflow-hidden">
+            <div class="game-launch-card quiz-launch-card game-launch-card-secondary rounded-[2.5rem] border border-orange-100 shadow-xl overflow-hidden">
                 <div class="game-launch-inner">
                     <div class="game-launch-visual quiz-launch-visual">
                         <span class="game-launch-badge">QUICK QUIZ</span>
@@ -425,12 +437,13 @@
                             <li>&#27599;&#38988;&#37117;&#26371;&#31435;&#21363;&#25552;&#31034;&#37325;&#40670;&#65292;&#24171;&#20320;&#26356;&#24555;&#29702;&#35299;&#29105;&#37327;&#33287;&#39640;&#34507;&#30333;&#36984;&#25799;</li>
                             <li>&#32080;&#26463;&#24460;&#26371;&#32066;&#32080;&#20320;&#30340;&#20581;&#24247;&#30452;&#35258;&#39006;&#22411;&#65292;&#20006;&#25512;&#34214;&#36969;&#21512;&#30340;&#39184;&#30418;</li>
                         </ul>
-                    </div>
+                    <p class="game-launch-note">&#29992; 5 &#38988;&#24555;&#21839;&#24555;&#31572;&#65292;&#36319;&#33879;&#24247;&#22969;&#19968;&#36215;&#25226;&#29105;&#37327;&#35264;&#24565;&#35722;&#24471;&#26356;&#30452;&#35258;&#12290;</p>
                     <div class="game-launch-actions">
                         <button id="openQuizModalButton" type="button" class="btn-primary text-white rounded-full font-bold px-8 py-4 shadow-md">&#38283;&#22987;&#25361;&#25136;</button>
                     </div>
-                    <p class="game-launch-note">&#29992; 5 &#38988;&#24555;&#21839;&#24555;&#31572;&#65292;&#36319;&#33879;&#24247;&#22969;&#19968;&#36215;&#25226;&#29105;&#37327;&#35264;&#24565;&#35722;&#24471;&#26356;&#30452;&#35258;&#12290;</p>
                 </div>
+            </div>
+
             </div>
 
             <div id="gameExperience" class="game-shell rounded-[2.5rem] border border-orange-100 shadow-xl overflow-hidden">
@@ -573,8 +586,10 @@
                     <p class="store-info store-reg text-slate-600 text-sm mb-6">食品業者登錄字號：A-122721208-00161-0</p>
                     
                     </div>
-                    <div class="flex gap-3 mt-auto pt-2">
+                    <div class="store-action-row flex gap-3 mt-auto pt-2">
                         <a href="https://reurl.cc/E4peRK" target="_blank" rel="noopener noreferrer" class="flex-[1.5] py-3 btn-primary text-white rounded-xl text-base font-bold text-center">立即訂餐</a>
+                        <a href="tel:0223315166" class="store-quick-action py-3 rounded-xl text-base font-bold text-center">立即撥號</a>
+                        <a href="https://maps.google.com/?q=台北市中正區延平南路171巷1號" target="_blank" rel="noopener noreferrer" class="store-quick-action py-3 rounded-xl text-base font-bold text-center">地圖導航</a>
                     </div>
                 </div>
                 <div class="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-200 hover:border-brand-orange transition-colors text-center flex flex-col h-full">
@@ -586,8 +601,10 @@
                     <p class="store-info store-reg text-slate-600 text-sm mb-6">食品業者登錄字號：A-122721208-00162-1</p>
                     
                     </div>
-                    <div class="flex gap-3 mt-auto pt-2">
+                    <div class="store-action-row flex gap-3 mt-auto pt-2">
                         <a href="https://reurl.cc/yYQGMO" target="_blank" rel="noopener noreferrer" class="flex-[1.5] py-3 btn-primary text-white rounded-xl text-base font-bold text-center">立即訂餐</a>
+                        <a href="tel:0225079662" class="store-quick-action py-3 rounded-xl text-base font-bold text-center">立即撥號</a>
+                        <a href="https://maps.google.com/?q=台北市中山區伊通街109之2號" target="_blank" rel="noopener noreferrer" class="store-quick-action py-3 rounded-xl text-base font-bold text-center">地圖導航</a>
                     </div>
                 </div>
                 <div class="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-200 hover:border-brand-orange transition-colors text-center flex flex-col h-full">
@@ -599,8 +616,10 @@
                     <p class="store-info store-reg text-slate-600 text-sm mb-6">食品業者登錄字號：F-122721208-00169-3</p>
                     
                     </div>
-                    <div class="flex gap-3 mt-auto pt-2">
+                    <div class="store-action-row flex gap-3 mt-auto pt-2">
                         <a href="https://ddc.ai/1bblEe" target="_blank" rel="noopener noreferrer" class="flex-[1.5] py-3 btn-primary text-white rounded-xl text-base font-bold text-center">立即訂餐</a>
+                        <a href="tel:0226736012" class="store-quick-action py-3 rounded-xl text-base font-bold text-center">立即撥號</a>
+                        <a href="https://maps.google.com/?q=新北市三峽區學成路250號" target="_blank" rel="noopener noreferrer" class="store-quick-action py-3 rounded-xl text-base font-bold text-center">地圖導航</a>
                     </div>
                 </div>
             </div>
@@ -643,7 +662,7 @@
 
     <!-- AI 聊天管家 (京哥) -->
 
-    <!-- ??????? -->
+    <!-- 頁面提示 -->
 
     <div id="toast">訊息</div>
 
@@ -693,3 +712,4 @@
     
 </body>
 </html>
+
