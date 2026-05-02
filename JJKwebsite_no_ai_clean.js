@@ -7,6 +7,15 @@ const ALLOWED_IMAGE_HOSTS = new Set([
 const CONTENT_API_URL = '/api/content';
 const MSG_INVALID_LINK = '連結格式不正確或不在允許清單內。';
 
+function trackEvent(eventName, params = {}) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+        event: eventName,
+        ...params
+    });
+}
+
+
 const menuData = [
     { id: 1, name: '香滷牛腱餐盒', price: 170, desc: '精選十三香滷包慢火燉煮牛腱，口感扎實、香氣厚實。', img: 'https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/%E9%A6%99%E9%AD%AF%E7%89%9B%E7%85%8E%E9%A4%90%E7%9B%92-%E5%8E%BB%E7%95%AA%E8%8C%84.png', calories: 512, protein: 35.8, fat: 12.5, carbs: 64.2 },
     { id: 2, name: '焙煎胡麻肉片餐盒', price: 115, desc: '焙煎胡麻醬香濃滑順，搭配豬肉片與均衡配菜，經典耐吃。', img: 'https://formosachangcoltd.wpcomstaging.com/wp-content/uploads/2026/03/%E7%84%99%E7%85%8E%E8%83%A1%E9%BA%BB%E8%82%89%E7%89%87%E9%A4%90%E7%9B%92-%E5%8E%BB%E7%95%AA%E8%8C%84.png', calories: 435, protein: 21.5, fat: 16.2, carbs: 50.8 },
@@ -483,6 +492,9 @@ function safeOpen(url) {
         showToast(MSG_INVALID_LINK);
         return;
     }
+
+    trackEvent('external_link_click', { url: parsed.toString() });
+
     const newWindow = window.open(parsed.toString(), '_blank', 'noopener,noreferrer');
     if (newWindow) newWindow.opener = null;
 }
@@ -627,21 +639,39 @@ function initMobileNewsCollapse() {
     updateMobileNewsVisibility();
 }
 
+function normalizePhoneHref(phone = '') {
+    return String(phone).replace(/[^\d+]/g, '');
+}
+
 function buildLocationCard(item) {
     const card = createElement('article', 'bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-200 hover:border-brand-orange transition-colors text-center flex flex-col h-full');
     const title = createElement('h3', 'text-2xl font-bold text-brand-orange mb-4', item.name || '');
     const infoWrap = createElement('div', 'store-info-block');
     infoWrap.append(
-        createElement('p', 'store-info store-address text-slate-600 text-sm mb-2', `📍 ${item.address || ''}`),
-        createElement('p', 'store-info store-phone text-slate-600 text-sm mb-8', `📞 ${item.phone || ''}`),
+        createElement('p', 'store-info store-address text-slate-600 text-sm mb-2', '📍 ' + (item.address || '')),
+        createElement('p', 'store-info store-phone text-slate-600 text-sm mb-8', '📞 ' + (item.phone || '')),
         createElement('p', 'store-info store-hours text-slate-600 text-sm mb-1', item.hours || ''),
         createElement('p', 'store-info store-reg text-slate-600 text-sm mb-6', item.registration || ''),
     );
 
-    const buttonRow = createElement('div', 'flex gap-3 mt-auto pt-2');
+    const buttonRow = createElement('div', 'store-action-row flex gap-3 mt-auto pt-2');
     const orderLink = createElement('a', 'flex-[1.5] py-3 btn-primary text-white rounded-xl text-base font-bold text-center', '立即訂餐');
     applySafeExternalHref(orderLink, item.mapUrl || '');
     buttonRow.appendChild(orderLink);
+
+    if (item.phone) {
+        const callLink = createElement('a', 'store-quick-action py-3 rounded-xl text-base font-bold text-center', '立即撥號');
+        callLink.href = 'tel:' + normalizePhoneHref(item.phone);
+        buttonRow.appendChild(callLink);
+    }
+
+    if (item.address) {
+        const mapLink = createElement('a', 'store-quick-action py-3 rounded-xl text-base font-bold text-center', '地圖導航');
+        mapLink.target = '_blank';
+        mapLink.rel = 'noopener noreferrer';
+        applySafeExternalHref(mapLink, 'https://maps.google.com/?q=' + encodeURIComponent(item.address));
+        buttonRow.appendChild(mapLink);
+    }
 
     card.append(title, infoWrap, buttonRow);
     return card;
@@ -716,6 +746,9 @@ function toggleModal(show) {
     if (!modal) return;
     modal.classList.toggle('hidden', !show);
     modal.classList.toggle('modal-active', show);
+    if (show) {
+        trackEvent('store_modal_open');
+    }
 }
 
 function bindEvents() {
@@ -743,6 +776,9 @@ function bindEvents() {
     };
 
     openStoreModalButton?.addEventListener('click', () => toggleModal(true));
+    document.querySelectorAll('[data-open-store-modal="true"]').forEach((button) => {
+        button.addEventListener('click', () => toggleModal(true));
+    });
     openMobileMenuButton?.addEventListener('click', () => {
         if (mobileQuickMenu?.classList.contains('hidden')) {
             openMobileMenu();
@@ -861,6 +897,12 @@ function initCalorieCalculator() {
         recommendedMealsContainer.replaceChildren(...getCalculatorRecommendations(goal).map(createCalculatorRecommendation));
         calcResult.classList.remove('hidden');
         calcResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        trackEvent('calculator_calculate', {
+            gender,
+            goal,
+            target_calories: targetCalories
+        });
     });
 }
 
@@ -1390,6 +1432,8 @@ function createJinggeRushGame() {
         playGameSound('start');
         startGameBgm();
         startLoop();
+
+        trackEvent('game_start', { game_name: 'jingge_rush' });
     }
 
     function endGame(reason) {
@@ -1409,6 +1453,13 @@ function createJinggeRushGame() {
             ? '這回先被高熱量炸物攔下了，下次專注接住健康食材就能更快衝高分。'
             : '時間到，辛苦了。現在來看看你的分數對應哪種健康餐盒。';
         setOverlay(true, '本局結算', result.rank, endingCopy, true);
+
+        trackEvent('game_finish', {
+            game_name: 'jingge_rush',
+            score: state.score,
+            rank: result.rank,
+            reason: reason
+        });
     }
 
     function spawnItem() {
@@ -1995,6 +2046,12 @@ function createCaloriesQuizGame() {
         nextButton.classList.add('hidden');
         restartButton.classList.remove('hidden');
         progressFill.style.width = '100%';
+
+        trackEvent('quiz_finish', {
+            score: state.score,
+            rank: result.rank,
+            set_index: state.setIndex
+        });
     }
 
     function selectChoice(index) {
@@ -2122,6 +2179,11 @@ function setWeatherThemeSelection(selection) {
     if (!selection) return;
     applyWeatherTheme(selection.theme, selection.label);
     syncThemeSwitcherState();
+
+    trackEvent('theme_change', {
+        theme_mode: selection.theme,
+        theme_label: selection.label
+    });
 }
 
 function closeThemeSwitcher() {
