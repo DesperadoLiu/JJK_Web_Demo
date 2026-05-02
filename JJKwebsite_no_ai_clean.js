@@ -8,6 +8,12 @@ const CONTENT_API_URL = '/api/content';
 const MSG_INVALID_LINK = '連結格式不正確或不在允許清單內。';
 
 function trackEvent(eventName, params = {}) {
+    // 直接推送到 GA4 (gtag)
+    if (typeof gtag === 'function') {
+        gtag('event', eventName, params);
+    }
+    
+    // 同時也保留 dataLayer 備用，確保未來 GTM 設定後也能接收到
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
         event: eventName,
